@@ -14,6 +14,7 @@ Return these fields:
 - Clarifying questions
 - Recommended route
 
+
 ## Stage 2: Diagnose
 Return these fields:
 - Probable causes ranked as hypotheses
