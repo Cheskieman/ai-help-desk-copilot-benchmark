@@ -26,3 +26,10 @@ Return these fields:
 - Escalation trigger
 
 If evidence is insufficient, return questions or tests. Do not invent a fix.
+
+
+## Stage 3: Communicate and Document
+Return these fields:
+- Customer-facing update
+- Internal work notes
+- Knowledge-article candidate only when the resolution is verified
