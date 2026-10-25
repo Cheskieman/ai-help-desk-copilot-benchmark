@@ -13,3 +13,15 @@ Return these fields:
 - Missing information
 - Clarifying questions
 - Recommended route
+
+## Stage 2: Diagnose
+Return these fields:
+- Probable causes ranked as hypotheses
+- Evidence for and against each hypothesis
+- Safest next checks
+- Assumptions
+- Confidence
+- Vendor sources to verify
+- Escalation trigger
+
+If evidence is insufficient, return questions or tests. Do not invent a fix.
