@@ -22,7 +22,7 @@ Reason: A single user losing connectivity after lunch often points to a local de
 
 ### Copilot response
 Likely fix: Restart the shared printer and clear any stuck print jobs in the print queue.
-Reason: Multiple users being unable to print to the same device suggests a problem with the shared printer or print service. Because payroll is approaching, restoring the shared printer should be prioritized.
+Reason: Multiple users can't print to the same device, suggesting an issue with the shared printer or print service. Because payroll is approaching, restoring the shared printer should be prioritized.
 
 ### Baseline review
 - **Impact and scope: Partial.** Noticed multiple users and payroll urgency. Gave only a few possible causes.
