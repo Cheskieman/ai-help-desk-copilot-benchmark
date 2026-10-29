@@ -869,3 +869,652 @@ The totals are a summary. The written reasons in each ticket table carry the act
 - Each ticket was run once. Consistency across repeated runs was not tested.
 - One reviewer scored both versions, and the same person ran both, so bias is possible.
 - Three fictional tickets are a small sample. These results do not show that the workflow improves real support work.
+
+
+
+
+# Improved Results
+
+
+"Ticket 1"
+
+## Stage 1: Triage
+
+### 1. Problem statement
+
+A single user reports loss of internet connectivity after returning from lunch. No error message, symptoms, or device details were provided. (Synthetic training scenario.)
+
+### 2. Affected users and systems
+
+- Affected users: 1 user (reported)
+- Affected systems: Unknown
+- Potentially impacted:
+    - User workstation/laptop
+    - Local network connection (wired or wireless)
+    - ISP/network services
+    - VPN (if applicable)
+
+### 3. Business impact
+
+- User may be unable to access internet-dependent business applications and services.
+- Impact currently appears limited to a single user.
+- Broader organizational impact is not indicated by the ticket.
+
+### 4. Urgency
+
+**Medium (tentative)**
+
+Reason:
+
+- Individual user impact.
+- Unable to determine severity due to missing details.
+- Upgrade urgency if business-critical work is blocked.
+
+### 5. Category
+
+**Network Connectivity → Individual User Internet Access**
+
+### 6. Missing information
+
+- User device type and operating system
+- Wired or Wi-Fi connection
+- Exact symptoms observed
+- Any error messages
+- Whether internal resources are reachable
+- Whether VPN is in use
+- Whether other users nearby are affected
+- Time issue began
+- Recent changes (updates, docking/undocking, location changes)
+
+### 7. Clarifying questions
+
+1. Is the device connected via Wi‑Fi or Ethernet?
+2. What operating system is being used?
+3. Can the user access any internal resources?
+4. What error appears when attempting to browse the internet?
+5. Are other users in the same location affected?
+6. Did the user move locations, reconnect a dock, or resume from sleep after lunch?
+7. Is a VPN connected?
+8. Does the device show a network connection icon or a disconnected status?
+
+### 8. Recommended route
+
+**Tier 1 Network/Desktop Support Investigation**
+
+Human review required before any actions are performed.
+
+---
+
+## Stage 2: Diagnose
+
+### 1. Probable causes ranked as hypotheses
+
+| Rank | Hypothesis |
+| --- | --- |
+| H1 | Local workstation network adapter lost connectivity after sleep/resume |
+| H2 | Wi‑Fi/Ethernet connection was disconnected or degraded |
+| H3 | DHCP/DNS configuration issue affecting internet access |
+| H4 | VPN client or security software interfering with connectivity |
+| H5 | Localized network outage affecting a limited area |
+| H6 | ISP or upstream service disruption |
+
+### 2. Evidence for and against each hypothesis
+
+#### H1: Network adapter state issue after sleep/resume
+
+**Evidence for**
+
+- Problem reportedly began after lunch, potentially after device idle/sleep period.
+- Common individual-user symptom.
+
+**Evidence against**
+
+- No confirmation device was asleep.
+- No adapter status information provided.
+
+#### H2: Wi‑Fi/Ethernet disconnect
+
+**Evidence for**
+
+- Single-user scope.
+- Physical or wireless disconnections frequently affect individual users.
+
+**Evidence against**
+
+- No connectivity status reported.
+- No indication whether connection is wired or wireless.
+
+#### H3: DHCP/DNS issue
+
+**Evidence for**
+
+- Can cause internet access failure while device appears connected.
+
+**Evidence against**
+
+- No information regarding network status, addressing, or name resolution.
+
+#### H4: VPN or security software interference
+
+**Evidence for**
+
+- Common cause of connectivity issues following resume or network changes.
+
+**Evidence against**
+
+- VPN usage not mentioned.
+
+#### H5: Local network outage
+
+**Evidence for**
+
+- Possible if user sits in a localized affected area.
+
+**Evidence against**
+
+- Only one user reported.
+
+#### H6: ISP/upstream outage
+
+**Evidence for**
+
+- Could result in loss of internet access.
+
+**Evidence against**
+
+- No reports of wider impact.
+- Single-user scope makes this less likely.
+
+### 3. Safest next checks
+
+1. Confirm whether other users are affected.
+2. Verify whether the device shows connected/disconnected status.
+3. Confirm whether connection is Wi‑Fi or Ethernet.
+4. Determine whether internal resources are reachable.
+5. Collect any displayed error messages.
+6. Confirm VPN status.
+7. Review workstation network adapter state.
+8. Check for known network-service incidents through approved monitoring tools.
+
+These checks are investigative and non-destructive.
+
+### 4. Assumptions
+
+- Ticket describes one user only.
+- No error message was supplied.
+- No confirmed infrastructure outage exists.
+- User's report is accurate but incomplete.
+
+### 5. Confidence
+
+**Low (25%)**
+
+Reason: Insufficient evidence to favor any single hypothesis.
+
+### 6. Vendor sources to verify
+
+Potential sources for validation after additional details are gathered:
+
+- Microsoft Windows networking troubleshooting documentation
+- Microsoft VPN client documentation (if applicable)
+- Network equipment vendor knowledge base (vendor unspecified)
+- ISP status resources (if outage suspected)
+
+No source can currently confirm root cause because diagnostic information is incomplete.
+
+### 7. Escalation trigger
+
+Escalate if any of the following occur:
+
+- Multiple users become affected.
+- Network monitoring indicates infrastructure issues.
+- Connectivity loss persists after Tier 1 investigation.
+- Evidence points to network infrastructure, VPN infrastructure, or ISP services.
+- Business-critical operations are blocked and require expedited handling.
+
+---
+
+## Stage 3: Communicate and Document
+
+### 1. Customer-facing update
+
+> We have received the report that internet connectivity was lost after lunch. At this time, the available information is limited and no error details were provided. We are gathering additional information to determine whether the issue is isolated to the device, network connection, or another service. No root cause has been confirmed. Further investigation is in progress.
+> 
+> 
+> **Human review required before any actions or communications are sent.**
+> 
+
+### 2. Internal work notes
+
+- Ticket received for individual connectivity loss.
+- One affected user reported.
+- No error message supplied.
+- Scope unknown.
+- No confirmed outage.
+- Primary hypotheses:
+    1. Network adapter state issue after resume
+    2. Wi‑Fi/Ethernet disconnect
+    3. DHCP/DNS issue
+    4. VPN/security software interference
+- Awaiting information on:
+    - Connection type
+    - Error details
+    - VPN status
+    - Impact to nearby users
+    - Device/network state
+- No remediation recommended at this stage due to insufficient evidence.
+
+### 3. Knowledge-article candidate
+
+**Not applicable.**
+
+Resolution is not yet verified. Per workflow requirements, no knowledge article should be created until a confirmed root cause and validated resolution exist.
+
+
+
+"Ticket 2"
+
+Ticket 2 Output: ( New Chat in Copilot)
+
+## Stage 1: Triage
+
+### 1. Problem statement
+
+Several finance users report they cannot use a shared printer prior to a payroll deadline. The exact failure mode (cannot connect, cannot print, jobs stuck, printer offline, errors, etc.) is not specified.
+
+### 2. Affected users and systems
+
+- Affected users: Multiple finance department users
+- Affected system: Shared network printer (specific printer unknown)
+- Potentially affected systems:
+    - Print server
+    - Network connectivity
+    - User workstations
+    - Printer hardware
+
+### 3. Business impact
+
+- Payroll-related documents may not be printed before a deadline.
+- Finance operations could be delayed.
+- Multiple users are impacted, indicating potential disruption to a business-critical process.
+
+### 4. Urgency
+
+**High**
+
+Reason: Multiple users are affected and a payroll deadline is approaching.
+
+### 5. Category
+
+**Infrastructure / Printing Services / Shared Printer Incident**
+
+### 6. Missing information
+
+- Printer name and location
+- Exact error message(s)
+- Whether all finance users are affected or only some
+- Whether any non-finance users can print
+- Whether jobs reach the print queue
+- Whether the printer appears online
+- Whether the issue began recently or has been ongoing
+- Whether users can print to other printers
+
+### 7. Clarifying questions
+
+1. What error message do users receive?
+2. Is the printer visible and online from user devices?
+3. Can anyone successfully print to this printer?
+4. Can affected users print to alternate printers?
+5. Are print jobs stuck in a queue?
+6. When was the issue first noticed?
+7. Were any recent changes made to the network, printer, drivers, or print server?
+
+### 8. Recommended route
+
+- Assign to Tier 1 for initial validation and evidence gathering.
+- If printer/server outage is confirmed or multiple departments are affected, escalate to Infrastructure/Desktop Support team.
+- Require human review before any remediation actions.
+
+---
+
+## Stage 2: Diagnose
+
+### 1. Probable causes ranked as hypotheses
+
+| Rank | Hypothesis |
+| --- | --- |
+| 1 | Shared printer is offline or unavailable |
+| 2 | Print server service or queue issue |
+| 3 | Network connectivity problem between users and printer |
+| 4 | Printer consumable or hardware issue (paper, toner, jam, fault state) |
+| 5 | User-specific permissions, driver, or workstation issue |
+
+### 2. Evidence for and against each hypothesis
+
+#### Hypothesis 1: Printer offline or unavailable
+
+**For**
+
+- Multiple users affected.
+- Shared resource involved.
+
+**Against**
+
+- No confirmation printer status is offline.
+
+#### Hypothesis 2: Print server service or queue issue
+
+**For**
+
+- Multiple users unable to use the same shared printer.
+- Centralized failure could affect many users simultaneously.
+
+**Against**
+
+- No evidence regarding queue behavior or print server health.
+
+#### Hypothesis 3: Network connectivity problem
+
+**For**
+
+- Shared printer access depends on network connectivity.
+- Multiple users impacted.
+
+**Against**
+
+- No reports of broader network issues.
+
+#### Hypothesis 4: Hardware or consumable issue
+
+**For**
+
+- Physical printer issues commonly prevent printing.
+- Can affect all users.
+
+**Against**
+
+- No observed device fault reported.
+
+#### Hypothesis 5: Permissions, drivers, or workstation issue
+
+**For**
+
+- Printing failures can result from configuration issues.
+
+**Against**
+
+- Multiple users affected simultaneously makes this less likely unless caused by a recent centralized change.
+
+### 3. Safest next checks
+
+1. Verify printer status (online/offline/error state).
+2. Check whether print jobs appear in the printer or print server queue.
+3. Determine whether any user can successfully print.
+4. Confirm network reachability to the printer and print server.
+5. Review printer panel for fault indicators.
+6. Identify whether alternate printers are functional.
+7. Review recent changes affecting printing infrastructure.
+
+These checks are non-destructive and suitable for initial investigation.
+
+### 4. Assumptions
+
+- The printer is a shared network printer.
+- Users recently had expected access.
+- No verified evidence is available regarding hardware, network, or server status.
+- Ticket contains only synthetic training data.
+
+### 5. Confidence
+
+**Low to Medium**
+
+Reason: Evidence is insufficient to determine root cause. Multiple plausible causes remain.
+
+### 6. Vendor sources to verify
+
+- Printer manufacturer support documentation for the specific model
+- Microsoft Windows Print Management and Print Spooler documentation
+- Print server vendor documentation (if applicable)
+- Internal IT knowledge base and monitoring tools
+
+### 7. Escalation trigger
+
+Escalate if any of the following are confirmed:
+
+- Shared printer outage affecting multiple users
+- Print server service failure
+- Hardware fault requiring physical intervention
+- Network connectivity issue beyond Tier 1 authority
+- Payroll deadline at risk despite initial troubleshooting
+- Root cause cannot be confirmed after standard validation checks
+
+---
+
+## Stage 3: Communicate and Document
+
+### 1. Customer-facing update
+
+> We are investigating reports that multiple finance users are unable to use the shared printer. At this time, the cause has not been confirmed. Initial validation is underway to determine whether the issue is related to printer availability, print services, network connectivity, or another shared component. Given the upcoming payroll deadline, the incident is being treated as a high-priority matter. Further updates will be provided after additional checks are completed.
+> 
+> 
+> **Human review required before sending.**
+> 
+
+### 2. Internal work notes
+
+- Incident received involving multiple finance users unable to use a shared printer.
+- Business impact elevated due to payroll deadline.
+- Root cause currently unknown.
+- Need to collect:
+    - Printer identifier/location
+    - Error messages
+    - Queue status
+    - Printer status
+    - Number of affected users
+    - Availability of alternate printers
+- Initial hypotheses:
+    1. Printer offline
+    2. Print server/queue fault
+    3. Network connectivity issue
+    4. Hardware/consumable fault
+    5. Client-side configuration issue
+- No remediation performed.
+- Awaiting additional evidence.
+- **Human review required before any action is taken.**
+
+### 3. Knowledge-article candidate
+
+**Not applicable.**
+
+A knowledge article should only be created after the root cause and resolution have been verified and documented. No verified resolution exists at this time.
+
+
+"Ticket 3"
+
+
+# Stage 1: Triage
+
+**Problem statement**
+
+A single Windows 11 laptop repeatedly fails to install a Windows update. No error code, update KB number, screenshots, logs, or failure stage were provided. (Synthetic training scenario.)
+
+**Affected users and systems**
+
+- Affected users: 1 user (assumed from ticket text)
+- Affected systems: 1 Windows 11 laptop
+- Related services: Windows Update
+
+**Business impact**
+
+- Potential security and compliance risk if updates cannot be installed.
+- Possible loss of access to bug fixes and feature improvements.
+- Current impact cannot be fully assessed because update type and failure duration are unknown.
+
+**Urgency**
+
+- **Medium (provisional)**
+- Upgrade to High if the update is a security update, multiple devices become affected, or the user is blocked from business-critical work.
+
+**Category**
+
+- Endpoint Management
+- Windows 11
+- Windows Update Failure
+
+**Missing information**
+
+- Error code/message
+- Update KB number or update title
+- When the failure occurs (download, install, reboot, rollback)
+- Device build/version of Windows 11
+- Whether other updates succeed
+- Available disk space
+- Managed or unmanaged device status
+- Recent system changes
+- Relevant Windows Update logs/screenshots
+
+**Clarifying questions**
+
+1. What exact update is failing (KB number or title)?
+2. Is an error code displayed?
+3. At what percentage or stage does the update fail?
+4. Is the behavior reproducible after restart?
+5. Are other devices experiencing the same issue?
+6. Is the device managed by an organization?
+7. Is sufficient free disk space available?
+8. Were any hardware, driver, VPN, security software, or configuration changes recently made?
+
+**Recommended route**
+
+Tier 1 troubleshooting and information gathering. Escalate to Tier 2 endpoint engineering if error data indicates corruption, servicing stack issues, policy conflicts, or repeated failure after standard diagnostics.
+
+---
+
+# Stage 2: Diagnose
+
+## 1. Probable causes ranked as hypotheses
+
+### Hypothesis 1: Insufficient diagnostic information to determine root cause
+
+**Likelihood:** High
+
+### Hypothesis 2: Corrupted Windows Update components or cache
+
+**Likelihood:** Moderate
+
+### Hypothesis 3: System file corruption affecting update installation
+
+**Likelihood:** Moderate
+
+### Hypothesis 4: Update-specific issue (known issue, compatibility hold, or safeguard block)
+
+**Likelihood:** Moderate
+
+### Hypothesis 5: Environmental issue (storage, connectivity, permissions, policy, security software)
+
+**Likelihood:** Moderate-Low
+
+---
+
+## 2. Evidence for and against each hypothesis
+
+| Hypothesis | Evidence For | Evidence Against |
+| --- | --- | --- |
+| Insufficient information | No error code, update identifier, logs, or screenshots supplied | None |
+| Corrupted update components | Repeated update failures are a common symptom | No diagnostic evidence provided |
+| System file corruption | Can prevent updates from installing successfully | No corruption indicators available |
+| Update-specific issue | Some Windows releases are subject to documented known issues and safeguard holds | No update ID provided |
+| Environmental issue | Disk, network, permissions, policy, or third-party software can interfere with updates | No evidence currently available |
+
+---
+
+## 3. Safest next checks
+
+1. Identify the failing update (KB number/title).
+2. Capture the exact error message or error code.
+3. Determine whether failure occurs during:
+    - Download
+    - Install
+    - Restart
+    - Rollback
+4. Confirm available free disk space.
+5. Review Windows Update history.
+6. Run the built-in Windows Update troubleshooter, which Microsoft recommends as a first diagnostic step. [[support.mi...rosoft.com]](https://support.microsoft.com/en-us/windows/windows-update-troubleshooter-19bc41ca-ad72-ae67-af3c-89ce169755dd), [[support.mi...rosoft.com]](https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows)
+7. Check whether the update is associated with a documented Windows release-health issue or safeguard hold. [[learn.microsoft.com]](https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-25h2)
+8. Review update-related logs and event entries before any repair actions.
+
+**Note:** No corrective action is recommended yet because evidence is insufficient.
+
+---
+
+## 4. Assumptions
+
+- Ticket describes a single Windows 11 device.
+- Device is able to boot normally.
+- Failure involves Windows Update rather than application deployment.
+- No organizational outage is currently known.
+- All assumptions are unverified.
+
+---
+
+## 5. Confidence
+
+**Low (25%)**
+
+Rationale: The ticket lacks the minimum diagnostic details required to determine a likely root cause with confidence.
+
+---
+
+## 6. Vendor sources to verify
+
+1. Microsoft Support: Windows Update Troubleshooter guidance. [[support.mi...rosoft.com]](https://support.microsoft.com/en-us/windows/windows-update-troubleshooter-19bc41ca-ad72-ae67-af3c-89ce169755dd)
+2. Microsoft Support: Troubleshoot problems updating Windows. [[support.mi...rosoft.com]](https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows)
+3. Microsoft Learn: Windows Update troubleshooting guidance. [[learn.microsoft.com]](https://learn.microsoft.com/en-us/troubleshoot/windows-client/installing-updates-features-roles/troubleshoot-windows-update-issues)
+4. Microsoft Learn: Windows release health and known issues. [[learn.microsoft.com]](https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-25h2)
+
+---
+
+## 7. Escalation trigger
+
+Escalate to Tier 2 if any of the following occur:
+
+- Repeated failures continue after standard diagnostic data collection.
+- Windows Update troubleshooter reports unresolved issues. [[support.mi...rosoft.com]](https://support.microsoft.com/en-us/windows/windows-update-troubleshooter-19bc41ca-ad72-ae67-af3c-89ce169755dd), [[support.mi...rosoft.com]](https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows)
+- Evidence of servicing stack corruption or system file corruption is identified. [[learn.microsoft.com]](https://learn.microsoft.com/en-us/troubleshoot/windows-client/installing-updates-features-roles/troubleshoot-windows-update-issues)
+- Multiple devices begin exhibiting the same behavior.
+- Update is associated with a documented enterprise-impacting issue or safeguard hold. [[learn.microsoft.com]](https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-25h2)
+- Required logs indicate policy, management, or deployment-system involvement.
+
+---
+
+# Stage 3: Communicate and Document
+
+## 1. Customer-facing update
+
+> We have reviewed the reported Windows Update issue affecting your Windows 11 laptop. At this time, the update is repeatedly failing, but the ticket does not yet include the update identifier or any error details. To continue troubleshooting safely, we need the update name/KB number, any error message or code shown, and information about when the failure occurs (download, install, restart, or rollback). Once that information is collected, we can determine the appropriate next diagnostic steps.
+> 
+> 
+> **Human review required before sending.**
+> 
+
+---
+
+## 2. Internal work notes
+
+- Ticket received for recurring Windows Update failure on one Windows 11 laptop.
+- No error code, KB number, logs, screenshots, or failure stage supplied.
+- Diagnosis cannot be performed reliably with current evidence.
+- Requested additional diagnostic information.
+- Recommended review of Windows Update history and Microsoft-supported troubleshooting resources. [[support.mi...rosoft.com]](https://support.microsoft.com/en-us/windows/windows-update-troubleshooter-19bc41ca-ad72-ae67-af3c-89ce169755dd), [[support.mi...rosoft.com]](https://support.microsoft.com/en-us/windows/deployment/updates-lifecycle/troubleshoot-problems-updating-windows), [[learn.microsoft.com]](https://learn.microsoft.com/en-us/troubleshoot/windows-client/installing-updates-features-roles/troubleshoot-windows-update-issues)
+- No remediation executed.
+- No assumptions validated.
+- **Human review required before any customer communication or action.**
+
+---
+
+## 3. Knowledge-article candidate
+
+**Not created.**
+
+Reason: Resolution has not been verified. Per process requirements, a knowledge article should only be created after the root cause and successful resolution are confirmed.
+
