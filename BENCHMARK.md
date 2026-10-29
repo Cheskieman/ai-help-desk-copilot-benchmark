@@ -1,3 +1,48 @@
+# Benchmarking Microsoft Copilot on Fictional Windows Support Tickets
+
+This case study compares two ways of asking Microsoft Copilot for help with IT support tickets:
+
+1. A **weak baseline**: a one-line prompt that leaves Copilot to guess.
+2. A **structured three-stage workflow**: Triage, Diagnose, then Communicate and Document.
+
+Both versions are run on the same three fictional tickets and scored with the same rubric, so the only thing that changes is the prompt.
+
+> **All tickets are fictional (synthetic training scenarios).** No real user, company, or device data is used.
+
+## Why this project exists
+
+Anyone can say "better prompts help." This repository tests that claim with a fair before-and-after comparison, scores it with written reasons, and keeps the weaknesses visible. The goal is to show careful, honest evaluation of AI in IT support work, not to claim that Copilot fixes Windows problems.
+
+## Repository files
+
+| File | Purpose |
+|---|---|
+| `README.md` | This document: method, raw results, rubric, scores, and limits. |
+| `TEST-TICKETS.md` | The three fictional tickets, used unchanged for both versions. |
+| `PROMPT-WORKFLOW.md` | The structured three-stage support workflow prompts. |
+| `BENCHMARK.md` | Benchmark workspace file. |
+
+## Method
+
+1. **Fix the tickets.** Three fictional tickets with controlled evidence were written once and never edited between runs.
+2. **Run the baseline.** Each ticket was given to Copilot with the same one-line prompt and no added hints.
+3. **Run the workflow.** Each ticket was run through the three-stage workflow in its own separate chat, so details from one ticket could not influence another.
+4. **Preserve the raw output.** Copilot's answers are pasted unchanged. Reviewer notes are kept in separate sections so the AI's work and the reviewer's work are never confused.
+5. **Audit the baseline.** Each baseline answer was reviewed against eight checks: impact and scope, missing information and clarifying questions, evidence for the recommendation, source support, confidence, safe next actions, escalation trigger, and human approval. Each check received a status such as Absent or Partial.
+6. **Score both versions.** Baseline and improved outputs were scored on the same six rubric dimensions, 0 to 2 each (maximum 12 per ticket).
+
+The eight audit checks were folded into six rubric dimensions so scoring stays quick and repeatable. Escalation and human approval sit inside "Safe next actions and escalation," and source support and confidence sit inside "Source discipline and confidence."
+
+## How this document is organized
+
+1. **Baseline Results:** for each ticket, Copilot's raw baseline answer, the baseline review, and Copilot's raw three-stage output.
+2. **Scoring Rubric:** the six dimensions, the meaning of each score, and the baseline and improved scores.
+3. **Score Comparison:** baseline and improved scores side by side, with a reason beside every score.
+4. **Overall Totals:** the combined result across all three tickets.
+5. **Preserved Failures and Limits:** what went wrong or was not tested.
+
+---
+
 # Baseline Results
 
 All tickets are fictional. Copilot responses are pasted unchanged. Reviewer notes are my own and show what a stronger answer would add.
@@ -8,7 +53,7 @@ All tickets are fictional. Copilot responses are pasted unchanged. Reviewer note
 Likely fix: Disable and re-enable the user's network adapter (or reconnect to the Wi-Fi network).
 Reason: A single user losing connectivity after lunch often points to a local device or connection issue rather than a broader network outage.
 
-#### Baseline review
+### Baseline review
 - **Impact and scope: Partial.** Treated it as a single-user, local issue. Did not consider a broken IP address or a corrupted network stack.
 - **Missing information and clarifying questions: Absent.** Asked nothing. A stronger answer would have the user ping the local IP and gather `netsh` output.
 - **Evidence for the recommendation: Partial.** Used "single user" and "after lunch." Other network fixes may be needed alongside or instead of an adapter reset.
@@ -18,8 +63,12 @@ Reason: A single user losing connectivity after lunch often points to a local de
 - **Escalation trigger: Absent.** Not stated. Stronger answer: escalate to the network team if reconnecting fails.
 - **Human approval: Absent.** Not stated. Stronger answer: a technician reviews steps beyond reconnecting.
 
-##### Improved Results
+### Improved Results
 
+<details>
+<summary>Copilot's three-stage output for Ticket 1 (unchanged)</summary>
+
+```text
 Stage 1: Triage
 
 Problem statement
@@ -203,9 +252,9 @@ Knowledge-article candidate
 Not created.
 
 A knowledge article should only be drafted after the root cause and verified resolution are confirmed. Current evidence is insufficient and no resolution has been validated.
+```
 
-
-
+</details>
 
 ## Ticket 2: Shared Finance Printer Outage
 
@@ -213,7 +262,7 @@ A knowledge article should only be drafted after the root cause and verified res
 Likely fix: Restart the shared printer and clear any stuck print jobs in the print queue.
 Reason: Multiple users can't print to the same device, suggesting an issue with the shared printer or print service. Because payroll is approaching, restoring the shared printer should be prioritized.
 
-#### Baseline review
+### Baseline review
 - **Impact and scope: Partial.** Noticed multiple users and payroll urgency. Gave only a few possible causes.
 - **Missing information and clarifying questions: Absent.** Asked nothing. Stronger answer: is the printer powered on and online? Has the print spooler been restarted?
 - **Evidence for the recommendation: Partial.** Used "multiple users" and "same device." Reviewer reference: Microsoft printer connectivity guidance.
@@ -223,8 +272,12 @@ Reason: Multiple users can't print to the same device, suggesting an issue with 
 - **Escalation trigger: Absent.** Not stated. Stronger answer: escalate right away to a senior tech or print/server team if restart fails, the queue won't clear, or payroll is at risk. Notify the finance manager.
 - **Human approval: Absent.** Not stated. Stronger answer: Get Finance lead or on-duty technician approval before clearing the queue, since payroll documents may need reprinting.
 
-##### Improved Results
+### Improved Results
 
+<details>
+<summary>Copilot's three-stage output for Ticket 2 (unchanged)</summary>
+
+```text
 Stage 1: Triage
 
 Problem statement
@@ -432,12 +485,9 @@ Knowledge-article candidate
 Not created.
 
 Reason: Resolution has not been verified. Per process requirements, a knowledge article should only be proposed after the root cause and successful resolution are confirmed.
+```
 
-
-
-
-
-
+</details>
 
 ## Ticket 3: Recurring Windows 11 Update Failure
 
@@ -445,7 +495,7 @@ Reason: Resolution has not been verified. Per process requirements, a knowledge 
 Likely fix: Run the Windows Update Troubleshooter and retry the update.
 Reason: Repeated update failures on a single laptop are commonly caused by corrupted update components or configuration issues that the troubleshooter can often repair.
 
-#### Baseline review
+### Baseline review
 - **Impact and scope: Partial.** Noted a single laptop. Did not consider low disk space or internet connectivity.
 - **Missing information and clarifying questions: Absent.** Asked nothing. Stronger answer: ask for the error code and check whether free disk space meets update requirements.
 - **Evidence for the recommendation: Partial.** Used "repeated failures" but no specific error. Reviewer reference: Microsoft update troubleshooting documentation.
@@ -455,8 +505,12 @@ Reason: Repeated update failures on a single laptop are commonly caused by corru
 - **Escalation trigger: Absent.** Not stated. Stronger answer: escalate to a senior tech or endpoint team if the troubleshooter fails, the same error code recurs, or system files appear corrupted or the laptop won't boot normally.
 - **Human approval: Absent.** Not stated. Stronger answer: a technician approves deeper repairs and confirms files are backed up first.
 
-##### Improved Results
+### Improved Results
 
+<details>
+<summary>Copilot's three-stage output for Ticket 3 (unchanged)</summary>
+
+```text
 Stage 1: Triage
 
 Problem statement
@@ -675,12 +729,11 @@ Knowledge-article candidate
 Not applicable.
 
 Resolution has not been verified. Per process, no knowledge article should be created until root cause and successful resolution are confirmed through evidence and validation.
+```
 
+</details>
 
-
-
-
-
+---
 
 # Scoring Rubric
 
@@ -713,14 +766,44 @@ Each response is scored on the same six dimensions, 0 to 2 each, for a maximum o
 | Customer and internal communication | 1 | 1 | 1 |
 | **Total (out of 12)** | **4** | **3** | **4** |
 
-### Scoring notes
-- Ticket 2 scored 0 on safe actions and escalation because clearing the queue deletes jobs with no warning, and nothing was said about payroll escalation.
+### Baseline scoring notes
+- Ticket 2 scored 0 on safe actions and escalation because clearing the queue deletes jobs with no warning, and nothing was said about payroll escalation. The Ticket 2 baseline review labels this item "Partial" because it uses the earlier eight-check list, which separates safe actions from escalation. The rubric scores unsafe advice as 0.
 - Communication scored 1: the answers are clear but brief, with no user-facing reply or ticket note.
-- Scores reflect my review of the baseline only. They will be compared against the 3-stage workflow in a later section.
+- Baseline scores reflect my review of the one-line prompt only.
+
+## Improved scores (3-stage workflow)
+
+| Dimension | Ticket 1 | Ticket 2 | Ticket 3 |
+|-----------|:--:|:--:|:--:|
+| Problem summary and scope | 2 | 2 | 2 |
+| Missing information and clarifying questions | 2 | 2 | 2 |
+| Evidence-based diagnosis | 1 | 2 | 2 |
+| Safe next actions and escalation | 1 | 2 | 2 |
+| Source discipline and confidence | 1 | 1 | 1 |
+| Customer and internal communication | 1 | 2 | 2 |
+| **Total (out of 12)** | **8** | **11** | **11** |
+
+### Improved scoring notes
+- Source discipline scored 1 on every ticket: Copilot named general documentation categories, not specific documents a reader could open.
+- Ticket 1 scored lowest because it missed the IP and Winsock hypothesis, gave no approval step for technical actions, and its customer update never asked the user for the missing details.
+- Tickets 2 and 3 lost points only on source discipline.
+- Scores are the reviewer's judgment, with the written reason for each score in the Score Comparison section below.
+
+---
 
 # Score Comparison
 
 Both versions are scored with the same six dimensions, 0 to 2 each (max 12 per ticket). Scores reflect one reviewer, one run per ticket.
+
+## How to read the score tables
+
+| Column | Meaning |
+|---|---|
+| **Dimension** | The thing being graded. All six rubric dimensions are used for every ticket. |
+| **Baseline** | The 0 to 2 score for the one-line prompt. |
+| **Baseline reason** | Why the baseline received that score. |
+| **Improved** | The 0 to 2 score for the three-stage workflow. |
+| **Improved reason** | Why the improved version received that score, including why it stopped short of 2. |
 
 ## Ticket 1: Individual Connectivity Loss
 
@@ -767,14 +850,20 @@ Both versions are scored with the same six dimensions, 0 to 2 each (max 12 per t
 **Observed improvement:** The workflow covered disk space, which the baseline missed, and asked for the error code before recommending a fix.
 **Remaining limitation:** It said "No fix recommended due to insufficient evidence," which is cautious but less immediately useful than the troubleshooter suggestion.
 
-## Overall Totals
+---
+
+# Overall Totals
 
 | Version | Ticket 1 | Ticket 2 | Ticket 3 | Overall (out of 36) |
 |---|:--:|:--:|:--:|:--:|
 | Baseline (one-line prompt) | 4 | 3 | 4 | **11** |
 | Improved (3-stage workflow) | 8 | 11 | 11 | **30** |
+| Change | +4 | +8 | +7 | **+19** |
 
-## Preserved Failures and Limits
+The totals are a summary. The written reasons in each ticket table carry the actual evidence.
+
+# Preserved Failures and Limits
+
 - Source discipline scored 1 on every improved ticket: no specific, verified document was cited.
 - Ticket 1 improved the least: it missed the IP reset and Winsock path and lacked an approval step.
 - Each ticket was run once. Consistency across repeated runs was not tested.
