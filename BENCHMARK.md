@@ -717,3 +717,66 @@ Each response is scored on the same six dimensions, 0 to 2 each, for a maximum o
 - Ticket 2 scored 0 on safe actions and escalation because clearing the queue deletes jobs with no warning, and nothing was said about payroll escalation.
 - Communication scored 1: the answers are clear but brief, with no user-facing reply or ticket note.
 - Scores reflect my review of the baseline only. They will be compared against the 3-stage workflow in a later section.
+
+# Score Comparison
+
+Both versions are scored with the same six dimensions, 0 to 2 each (max 12 per ticket). Scores reflect one reviewer, one run per ticket.
+
+## Ticket 1: Individual Connectivity Loss
+
+| Dimension | Baseline | Baseline reason | Improved | Improved reason |
+|---|:--:|---|:--:|---|
+| Problem summary and scope | 1 | Treated it as a single-user local issue but never confirmed scope. | 2 | Restated the problem, named 1 known user, listed affected systems, and marked scope as unknown. |
+| Missing information and clarifying questions | 0 | Asked nothing. | 2 | Listed 8 missing items and 8 clarifying questions. |
+| Evidence-based diagnosis | 1 | Used "single user" and "after lunch" only. | 1 | Ranked five hypotheses with evidence for and against, but did not include a corrupted IP or Winsock stack hypothesis. |
+| Safe next actions and escalation | 1 | Low-risk step, but no handoff condition and no approval. | 1 | Safe checks and clear escalation triggers, but no approval step for technical actions (only for sending the update). |
+| Source discipline and confidence | 0 | No source and no stated confidence. | 1 | Stated overall confidence as Low, but sources are general categories, not specific documents. |
+| Customer and internal communication | 1 | One short fix and reason, no user message or ticket note. | 1 | Customer update and internal notes were present, but the update never asked the user for the missing details. |
+| **Total (out of 12)** | **4** | | **8** | |
+
+**Observed improvement:** The workflow asked for the information the baseline never requested (connection type, VPN, error messages).
+**Remaining limitation:** It missed the network stack and IP reset path, and gave no human approval step for technical actions.
+
+## Ticket 2: Shared Finance Printer Outage
+
+| Dimension | Baseline | Baseline reason | Improved | Improved reason |
+|---|:--:|---|:--:|---|
+| Problem summary and scope | 1 | Noticed multiple users and payroll, but gave no scope detail. | 2 | Identified a group impact, affected systems, business impact, and High urgency tied to the payroll deadline. |
+| Missing information and clarifying questions | 0 | Asked nothing. | 2 | Listed 8 missing items and 7 questions (error messages, queue status, recent changes). |
+| Evidence-based diagnosis | 1 | Used "multiple users" and "same device." | 2 | Five hypotheses, each with evidence for and against, tied to the ticket facts. |
+| Safe next actions and escalation | 0 | Cleared the queue with no warning and gave no escalation, despite payroll risk. | 2 | Safe read-only checks, immediate escalation conditions, and human review before any action. |
+| Source discipline and confidence | 0 | No source and no stated confidence. | 1 | Confidence given per hypothesis, but sources are general vendor categories, not specific articles. |
+| Customer and internal communication | 1 | No user message or ticket note. | 2 | Status update with impact and next step, plus detailed internal notes. |
+| **Total (out of 12)** | **3** | | **11** | |
+
+**Observed improvement:** The baseline's risky "clear the queue" advice was replaced by safe checks, a payroll-aware escalation plan, and a human review requirement.
+**Remaining limitation:** It recommended no fix at all, so a technician still has to turn the checks into action.
+
+## Ticket 3: Recurring Windows 11 Update Failure
+
+| Dimension | Baseline | Baseline reason | Improved | Improved reason |
+|---|:--:|---|:--:|---|
+| Problem summary and scope | 1 | Noted a single laptop, but not disk space or connectivity. | 2 | Identified 1 user and 1 laptop, flagged unknowns, and gave conditions for raising urgency. |
+| Missing information and clarifying questions | 0 | Asked nothing. | 2 | Asked for the error code, KB number, free disk space, and recent changes. |
+| Evidence-based diagnosis | 1 | Used "repeated failures" with no specific evidence. | 2 | Five hypotheses with evidence for and against, including the disk space cause the baseline missed. |
+| Safe next actions and escalation | 1 | Troubleshooter is low-risk, but no escalation and no approval. | 2 | Read-only checks, six escalation triggers, and "no changes without review and approval." |
+| Source discipline and confidence | 0 | No source and no stated confidence. | 1 | Overall confidence Low with a reason, but sources are general documentation categories. |
+| Customer and internal communication | 1 | No user message or ticket note. | 2 | Customer update asks for the KB number and error code, plus a usable internal note. |
+| **Total (out of 12)** | **4** | | **11** | |
+
+**Observed improvement:** The workflow covered disk space, which the baseline missed, and asked for the error code before recommending a fix.
+**Remaining limitation:** It said "No fix recommended due to insufficient evidence," which is cautious but less immediately useful than the troubleshooter suggestion.
+
+## Overall Totals
+
+| Version | Ticket 1 | Ticket 2 | Ticket 3 | Overall (out of 36) |
+|---|:--:|:--:|:--:|:--:|
+| Baseline (one-line prompt) | 4 | 3 | 4 | **11** |
+| Improved (3-stage workflow) | 8 | 11 | 11 | **30** |
+
+## Preserved Failures and Limits
+- Source discipline scored 1 on every improved ticket: no specific, verified document was cited.
+- Ticket 1 improved the least: it missed the IP reset and Winsock path and lacked an approval step.
+- Each ticket was run once. Consistency across repeated runs was not tested.
+- One reviewer scored both versions, and the same person ran both, so bias is possible.
+- Three fictional tickets are a small sample. These results do not show that the workflow improves real support work.
