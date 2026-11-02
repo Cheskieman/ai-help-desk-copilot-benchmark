@@ -35,15 +35,16 @@ The eight audit checks were folded into six rubric dimensions so scoring stays q
 
 ## How this document is organized
 
-1. **Baseline Results:** for each ticket, Copilot's raw baseline answer, the baseline review, and Copilot's raw three-stage output.
-2. **Scoring Rubric:** the six dimensions, the meaning of each score, and the baseline and improved scores.
-3. **Score Comparison:** baseline and improved scores side by side, with a reason beside every score.
-4. **Overall Totals:** the combined result across all three tickets.
-5. **Preserved Failures and Limits:** what went wrong or was not tested.
+1. **Results by Ticket:** one section per ticket, in this order: Copilot's baseline answer, the baseline review, the first three-stage output (Run 1), the Run 1 scoring, the second three-stage output (Run 2), and the Run 2 scoring.
+2. **Scoring Rubric:** the six dimensions, the meaning of each score, how to read the score tables, and the baseline, Run 1, and Run 2 scores.
+3. **Overall Totals:** the combined baseline, Run 1, and Run 2 results across all three tickets.
+4. **Preserved Failures and Limits:** what went wrong or was not tested.
+
+After the first complete set of runs (Run 1), each ticket was run through the three-stage workflow again in a new chat (Run 2). Both runs are scored with the same rubric.
 
 ---
 
-# Baseline Results
+# Results by Ticket
 
 All tickets are fictional. Copilot responses are pasted unchanged. Reviewer notes are my own and show what a stronger answer would add.
 
@@ -63,10 +64,10 @@ Reason: A single user losing connectivity after lunch often points to a local de
 - **Escalation trigger: Absent.** Not stated. Stronger answer: escalate to the network team if reconnecting fails.
 - **Human approval: Absent.** Not stated. Stronger answer: a technician reviews steps beyond reconnecting.
 
-### Improved Results
+### Improved Results: Run 1
 
 <details>
-<summary>Copilot's three-stage output for Ticket 1 (unchanged)</summary>
+<summary>Copilot's three-stage output for Ticket 1, Run 1 (unchanged)</summary>
 
 ```text
 Stage 1: Triage
@@ -256,556 +257,7 @@ A knowledge article should only be drafted after the root cause and verified res
 
 </details>
 
-## Ticket 2: Shared Finance Printer Outage
-
-### Copilot response
-Likely fix: Restart the shared printer and clear any stuck print jobs in the print queue.
-Reason: Multiple users can't print to the same device, suggesting an issue with the shared printer or print service. Because payroll is approaching, restoring the shared printer should be prioritized.
-
-### Baseline review
-- **Impact and scope: Partial.** Noticed multiple users and payroll urgency. Gave only a few possible causes.
-- **Missing information and clarifying questions: Absent.** Asked nothing. Stronger answer: is the printer powered on and online? Has the print spooler been restarted?
-- **Evidence for the recommendation: Partial.** Used "multiple users" and "same device." Reviewer reference: Microsoft printer connectivity guidance.
-- **Source support: Absent.** Cited nothing. Reviewer reference: Microsoft Support, "Fix printer connection and printing problems in Windows."
-- **Confidence: Absent.** Copilot did not state confidence. The reference is reputable, but that is the reviewer's judgment.
-- **Safe next actions: Partial.** Restart is low-risk. Clearing the queue deletes jobs with no warning. Stronger answer: check the printer connection first.
-- **Escalation trigger: Absent.** Not stated. Stronger answer: escalate right away to a senior tech or print/server team if restart fails, the queue won't clear, or payroll is at risk. Notify the finance manager.
-- **Human approval: Absent.** Not stated. Stronger answer: Get Finance lead or on-duty technician approval before clearing the queue, since payroll documents may need reprinting.
-
-### Improved Results
-
-<details>
-<summary>Copilot's three-stage output for Ticket 2 (unchanged)</summary>
-
-```text
-Stage 1: Triage
-
-Problem statement
- Several finance users are unable to use a shared printer shortly before a payroll deadline. The specific failure mode (cannot print, printer offline, jobs stuck, access denied, etc.) is not yet known.
-
-Affected users and systems
-
-Affected users: Multiple finance department users (exact number unknown)
-Affected systems: Shared printer and related print infrastructure (print server, network connectivity, printer hardware, or client devices)
-Scope: Appears to affect a group rather than a single individual
-
-Business impact
-
-Potential disruption to payroll-related activities
-Risk of delayed payroll processing or associated documentation
-Impact is concentrated on a business-critical function with a deadline
-
-Urgency
- High
- Reason: Multiple users affected and the issue is occurring before a payroll deadline.
-
-Category
-
-End User Services
-Printing and Print Services
-Shared Resource Outage
-
-Missing information
-
-Printer name/model
-Exact error messages
-Whether any users can print successfully
-Whether print jobs enter the queue
-Whether printer is networked or connected through a print server
-When the issue started
-Recent changes to printer, network, drivers, or print server
-Whether other departments are affected
-
-Clarifying questions
-
-What error message or behavior do users see?
-Are all finance users affected, or only some?
-Can any non-finance users print to the same printer?
-Is the printer visible and online?
-Are print jobs stuck in the queue?
-Did the issue begin after any recent change or maintenance?
-Are users able to print to other printers?
-
-Recommended route
-
-Route to Workplace/Endpoint Support or Infrastructure Print Services team.
-Escalate priority due to payroll-related business impact.
-Human review required before any actions are taken.
-Stage 2: Diagnose
-Probable causes ranked as hypotheses
-Hypothesis 1: Shared printer or print server outage
-
-Evidence for
-
-Multiple users affected simultaneously.
-Shared resource failures commonly affect groups of users.
-
-Evidence against
-
-No confirmation that all users or all departments are affected.
-
-Safest next checks
-
-Verify printer online status.
-Verify print server availability.
-Check printer queue for stalled jobs.
-
-Confidence
-
-Medium
-Hypothesis 2: Network connectivity issue between users and printer
-
-Evidence for
-
-Multiple users may lose access to a network printer simultaneously.
-Shared printers depend on network reachability.
-
-Evidence against
-
-No reports yet of broader network issues.
-
-Safest next checks
-
-Verify printer network connectivity.
-Confirm affected users can reach other network resources.
-Check for network alerts affecting the printer's location.
-
-Confidence
-
-Medium
-Hypothesis 3: Print queue blockage or spooler service issue
-
-Evidence for
-
-A single corrupted or stuck job can prevent subsequent jobs from printing.
-Common cause of sudden printing outages.
-
-Evidence against
-
-No evidence yet that jobs are actually reaching the queue.
-
-Safest next checks
-
-Review queue status.
-Check print spooler service health.
-Identify unusually large or failed print jobs.
-
-Confidence
-
-Medium-Low
-Hypothesis 4: Permission or access-control issue
-
-Evidence for
-
-Could affect a department-specific group.
-
-Evidence against
-
-Simultaneous permission failures affecting several users are less common without a recent change.
-
-Safest next checks
-
-Review recent permission changes.
-Compare successful and unsuccessful user access.
-
-Confidence
-
-Low
-Hypothesis 5: Printer hardware fault (paper, toner, jam, offline state)
-
-Evidence for
-
-Hardware faults frequently stop printing for all users.
-
-Evidence against
-
-No printer status information has been provided.
-
-Safest next checks
-
-Check printer display/status panel.
-Verify paper, toner, and error indicators.
-Confirm printer is powered on and operational.
-
-Confidence
-
-Low-Medium
-Assumptions
-This is a network-shared printer used by multiple finance users.
-The reported outage is current and unresolved.
-No verified root cause has been established.
-No troubleshooting results have yet been provided.
-Vendor sources to verify
-
-Useful vendor documentation may include:
-
-Microsoft Windows Print Management documentation
-Microsoft Print Spooler troubleshooting guidance
-Printer manufacturer support documentation for the affected model
-Escalation trigger
-
-Escalate immediately to Tier 2 or Print Services if:
-
-Payroll operations are blocked.
-Printer is confirmed offline and requires infrastructure intervention.
-Multiple departments are impacted.
-Print server services are degraded.
-No service restoration path is identified within agreed service targets.
-Stage 3: Communicate and Document
-Customer-facing update
-
-We are investigating reports that multiple finance users are unable to use a shared printer. Given the proximity to the payroll deadline, this incident is being treated as a high-priority issue. Initial assessment is underway to determine whether the cause is related to the printer itself, the print service, network connectivity, or access controls. Further updates will be provided after verification of the affected systems.
-
-Status: Under investigation
- Impact: Multiple finance users affected
- Next step: Technical validation and service-health checks
-
-Human review required before sending.
-
-Internal work notes
-Incident reported: shared printer unavailable to several finance users.
-Business impact elevated due to payroll deadline.
-Root cause not yet identified.
-Working hypotheses:
-Print server or shared printer outage
-Network connectivity issue
-Queue/spooler blockage
-Access-control issue
-Hardware fault
-Required checks:
-Printer status
-Print queue status
-Print server health
-Network connectivity
-Scope of affected users
-No corrective action recommended yet due to insufficient evidence.
-Human review required before any operational changes.
-Knowledge-article candidate
-
-Not created.
-
-Reason: Resolution has not been verified. Per process requirements, a knowledge article should only be proposed after the root cause and successful resolution are confirmed.
-```
-
-</details>
-
-## Ticket 3: Recurring Windows 11 Update Failure
-
-### Copilot response
-Likely fix: Run the Windows Update Troubleshooter and retry the update.
-Reason: Repeated update failures on a single laptop are commonly caused by corrupted update components or configuration issues that the troubleshooter can often repair.
-
-### Baseline review
-- **Impact and scope: Partial.** Noted a single laptop. Did not consider low disk space or internet connectivity.
-- **Missing information and clarifying questions: Absent.** Asked nothing. Stronger answer: ask for the error code and check whether free disk space meets update requirements.
-- **Evidence for the recommendation: Partial.** Used "repeated failures" but no specific error. Reviewer reference: Microsoft update troubleshooting documentation.
-- **Source support: Absent.** Cited nothing. Reviewer reference: Microsoft Support, "Troubleshoot problems updating Windows."
-- **Confidence: Absent.** Copilot did not state confidence. Words like "commonly" and "often" are vague.
-- **Safe next actions: Partial.** The troubleshooter is low-risk. Stronger answer: check disk space and connectivity first.
-- **Escalation trigger: Absent.** Not stated. Stronger answer: escalate to a senior tech or endpoint team if the troubleshooter fails, the same error code recurs, or system files appear corrupted or the laptop won't boot normally.
-- **Human approval: Absent.** Not stated. Stronger answer: a technician approves deeper repairs and confirms files are backed up first.
-
-### Improved Results
-
-<details>
-<summary>Copilot's three-stage output for Ticket 3 (unchanged)</summary>
-
-```text
-Stage 1: Triage
-
-Problem statement
- A Windows 11 laptop repeatedly fails to install a Windows Update. No error code, update identifier, or failure details were provided. (Synthetic training scenario.)
-
-Affected users and systems
-
-Known affected users: 1 user
-Known affected systems: 1 Windows 11 laptop
-Scope: Currently appears isolated to a single endpoint
-Unknown: Whether similar failures exist on other devices
-
-Business impact
-
-Device may miss security, reliability, or feature updates.
-Potential compliance and security risk if updates remain uninstalled.
-Unknown whether the failure is impacting user productivity.
-
-Urgency
-
-Medium (provisional)
-Increase to High if:
-Security updates are affected
-Multiple devices are impacted
-Device stability or business operations are affected
-
-Category
-
-Endpoint Management
-Windows Update
-Operating System Maintenance
-
-Missing information
-
-Windows Update error code
-Specific update KB number or update name
-Date and time of failures
-Whether all updates fail or only one update
-Available disk space
-Device management status (personal, managed, Intune-managed, etc.)
-Screenshots or update history details
-Windows build/version
-
-Clarifying questions
-
-What error message or error code is displayed?
-Which update is failing (KB number or title)?
-Is the failure occurring during download, installation, or restart?
-Are other updates installing successfully?
-How much free disk space is available?
-Has the device recently undergone major changes (drivers, upgrades, security software)?
-Is the device managed by an organization?
-
-Recommended route
-
-Tier 1 Windows Endpoint Support
-Collect diagnostic information before escalation
-Escalate to Tier 2 only if logs, error codes, or standard diagnostics indicate a deeper servicing or OS issue
-Stage 2: Diagnose
-Probable causes ranked as hypotheses
-Hypothesis 1: Corrupted Windows Update components or update cache
-
-Evidence for
-
-Repeated update failures are commonly associated with update cache or servicing component issues.
-No indication that the failure is tied to a specific application.
-
-Evidence against
-
-No error codes or logs provided.
-No confirmation that downloads or installations are actually failing.
-
-Safest next checks
-
-Review Windows Update history.
-Capture the exact error code.
-Check Event Viewer and Windows Update logs.
-Verify update service status.
-
-Confidence
-
-Moderate
-Hypothesis 2: Insufficient disk space or storage-related issue
-
-Evidence for
-
-Updates can fail when required free space is unavailable.
-Storage issues are a frequent cause of upgrade/install failures.
-
-Evidence against
-
-No storage information supplied.
-No indication of low-disk-space warnings.
-
-Safest next checks
-
-Verify available disk space.
-Check for storage-related warnings.
-
-Confidence
-
-Low to Moderate
-Hypothesis 3: Specific update package is defective or incompatible with the device state
-
-Evidence for
-
-Some failures affect only a particular update package.
-Repeated failure of a single KB can indicate a package-specific issue.
-
-Evidence against
-
-The update identifier is unknown.
-No pattern information is available.
-
-Safest next checks
-
-Identify the failing KB/article number.
-Review update history for success/failure patterns.
-
-Confidence
-
-Low to Moderate
-Hypothesis 4: Corrupted system files or servicing stack issues
-
-Evidence for
-
-Corrupted OS components can prevent successful update installation.
-Repeated failures may indicate servicing infrastructure problems.
-
-Evidence against
-
-No system integrity indicators supplied.
-No evidence from logs.
-
-Safest next checks
-
-Review servicing logs.
-Check for system file integrity errors through approved diagnostic procedures.
-
-Confidence
-
-Low to Moderate
-Hypothesis 5: Third-party security, driver, or software conflict
-
-Evidence for
-
-Security software and drivers can interfere with update installation.
-Endpoint-specific failures sometimes correlate with local software conflicts.
-
-Evidence against
-
-No recent changes have been reported.
-No supporting symptoms provided.
-
-Safest next checks
-
-Review recently installed software and drivers.
-Check security application logs for update-related events.
-
-Confidence
-
-Low
-Assumptions
-Only one Windows 11 endpoint is affected.
-The device can still boot and operate normally.
-No evidence currently suggests widespread service disruption.
-No update error code has been collected.
-Confidence
-
-Overall confidence: Low
-
-Reason: Critical diagnostic evidence (error code, update identifier, logs, screenshots, and timing information) is missing.
-
-Vendor sources to verify
-Microsoft Windows Update troubleshooting documentation
-Microsoft Windows Update deployment and servicing documentation
-Microsoft Update Catalog (for the specific KB if identified)
-Microsoft Learn articles related to the reported error code once obtained
-Escalation trigger
-
-Escalate to Tier 2 if any of the following occur:
-
-Error code cannot be resolved through documented troubleshooting.
-Servicing stack corruption is indicated by logs.
-Multiple devices exhibit the same failure.
-Security updates remain uninstalled after standard diagnostics.
-Update-related logs show OS corruption or enterprise-management issues.
-The device is business-critical and update failure creates operational risk.
-Stage 3: Communicate and Document
-Customer-facing update
-
-We are investigating a recurring Windows Update failure on your Windows 11 laptop. At this time, we do not have enough information to determine the cause. The next step is to collect the exact update name or KB number, any error code displayed, and update history details. Once that information is available, we can safely identify the most likely cause and determine the appropriate remediation path. No changes will be made without review and approval.
-
-Human review required before sending.
-
-Internal work notes
-Ticket received for recurring Windows Update failure.
-Single Windows 11 laptop reportedly affected.
-No error code, KB identifier, logs, screenshots, or update history supplied.
-Initial hypotheses:
-Corrupted Windows Update components/cache
-Storage limitation
-Update-specific package issue
-System servicing corruption
-Third-party software conflict
-Action required:
-Obtain error code
-Obtain update KB/title
-Review update history
-Check available disk space
-Collect relevant event and servicing log information
-Current diagnostic confidence: Low
-No fix recommended due to insufficient evidence.
-Knowledge-article candidate
-
-Not applicable.
-
-Resolution has not been verified. Per process, no knowledge article should be created until root cause and successful resolution are confirmed through evidence and validation.
-```
-
-</details>
-
----
-
-# Scoring Rubric
-
-Each response is scored on the same six dimensions, 0 to 2 each, for a maximum of 12 per ticket. The same rubric is applied to the baseline and to the 3-stage workflow.
-
-## Dimensions
-1. **Problem summary and scope:** Does it restate the problem and say who and what is affected?
-2. **Missing information and clarifying questions:** Does it name what it doesn't know and ask for it?
-3. **Evidence-based diagnosis:** Is the diagnosis tied to clues in the ticket?
-4. **Safe next actions and escalation:** Are the first steps low-risk, and does it say when to hand off and who must approve?
-5. **Source discipline and confidence:** Does it cite real sources and state how sure it is?
-6. **Customer and internal communication:** Is there a clear user-facing message and a usable ticket note?
-
-## Score values
-| Score | Meaning |
-|-------|---------|
-| 0 | The behavior is absent or unsafe. |
-| 1 | The behavior is partial. |
-| 2 | The behavior is complete and usable with human review. |
-
-## Baseline scores (one-line prompt)
-
-| Dimension | Ticket 1 | Ticket 2 | Ticket 3 |
-|-----------|:--:|:--:|:--:|
-| Problem summary and scope | 1 | 1 | 1 |
-| Missing information and clarifying questions | 0 | 0 | 0 |
-| Evidence-based diagnosis | 1 | 1 | 1 |
-| Safe next actions and escalation | 1 | 0 | 1 |
-| Source discipline and confidence | 0 | 0 | 0 |
-| Customer and internal communication | 1 | 1 | 1 |
-| **Total (out of 12)** | **4** | **3** | **4** |
-
-### Baseline scoring notes
-- Ticket 2 scored 0 on safe actions and escalation because clearing the queue deletes jobs with no warning, and nothing was said about payroll escalation. The Ticket 2 baseline review labels this item "Partial" because it uses the earlier eight-check list, which separates safe actions from escalation. The rubric scores unsafe advice as 0.
-- Communication scored 1: the answers are clear but brief, with no user-facing reply or ticket note.
-- Baseline scores reflect my review of the one-line prompt only.
-
-## Improved scores (3-stage workflow)
-
-| Dimension | Ticket 1 | Ticket 2 | Ticket 3 |
-|-----------|:--:|:--:|:--:|
-| Problem summary and scope | 2 | 2 | 2 |
-| Missing information and clarifying questions | 2 | 2 | 2 |
-| Evidence-based diagnosis | 1 | 2 | 2 |
-| Safe next actions and escalation | 1 | 2 | 2 |
-| Source discipline and confidence | 1 | 1 | 1 |
-| Customer and internal communication | 1 | 2 | 2 |
-| **Total (out of 12)** | **8** | **11** | **11** |
-
-### Improved scoring notes
-- Source discipline scored 1 on every ticket: Copilot named general documentation categories, not specific documents a reader could open.
-- Ticket 1 scored lowest because it missed the IP and Winsock hypothesis, gave no approval step for technical actions, and its customer update never asked the user for the missing details.
-- Tickets 2 and 3 lost points only on source discipline.
-- Scores are the reviewer's judgment, with the written reason for each score in the Score Comparison section below.
-
----
-
-# Score Comparison
-
-Both versions are scored with the same six dimensions, 0 to 2 each (max 12 per ticket). Scores reflect one reviewer, one run per ticket.
-
-## How to read the score tables
-
-| Column | Meaning |
-|---|---|
-| **Dimension** | The thing being graded. All six rubric dimensions are used for every ticket. |
-| **Baseline** | The 0 to 2 score for the one-line prompt. |
-| **Baseline reason** | Why the baseline received that score. |
-| **Improved** | The 0 to 2 score for the three-stage workflow. |
-| **Improved reason** | Why the improved version received that score, including why it stopped short of 2. |
-
-## Ticket 1: Individual Connectivity Loss
+### Scoring: Baseline vs. Run 1
 
 | Dimension | Baseline | Baseline reason | Improved | Improved reason |
 |---|:--:|---|:--:|---|
@@ -820,64 +272,12 @@ Both versions are scored with the same six dimensions, 0 to 2 each (max 12 per t
 **Observed improvement:** The workflow asked for the information the baseline never requested (connection type, VPN, error messages).
 **Remaining limitation:** It missed the network stack and IP reset path, and gave no human approval step for technical actions.
 
-## Ticket 2: Shared Finance Printer Outage
+### Improved Results: Run 2 (new chat)
 
-| Dimension | Baseline | Baseline reason | Improved | Improved reason |
-|---|:--:|---|:--:|---|
-| Problem summary and scope | 1 | Noticed multiple users and payroll, but gave no scope detail. | 2 | Identified a group impact, affected systems, business impact, and High urgency tied to the payroll deadline. |
-| Missing information and clarifying questions | 0 | Asked nothing. | 2 | Listed 8 missing items and 7 questions (error messages, queue status, recent changes). |
-| Evidence-based diagnosis | 1 | Used "multiple users" and "same device." | 2 | Five hypotheses, each with evidence for and against, tied to the ticket facts. |
-| Safe next actions and escalation | 0 | Cleared the queue with no warning and gave no escalation, despite payroll risk. | 2 | Safe read-only checks, immediate escalation conditions, and human review before any action. |
-| Source discipline and confidence | 0 | No source and no stated confidence. | 1 | Confidence given per hypothesis, but sources are general vendor categories, not specific articles. |
-| Customer and internal communication | 1 | No user message or ticket note. | 2 | Status update with impact and next step, plus detailed internal notes. |
-| **Total (out of 12)** | **3** | | **11** | |
+<details>
+<summary>Copilot's three-stage output for Ticket 1, Run 2 (unchanged)</summary>
 
-**Observed improvement:** The baseline's risky "clear the queue" advice was replaced by safe checks, a payroll-aware escalation plan, and a human review requirement.
-**Remaining limitation:** It recommended no fix at all, so a technician still has to turn the checks into action.
-
-## Ticket 3: Recurring Windows 11 Update Failure
-
-| Dimension | Baseline | Baseline reason | Improved | Improved reason |
-|---|:--:|---|:--:|---|
-| Problem summary and scope | 1 | Noted a single laptop, but not disk space or connectivity. | 2 | Identified 1 user and 1 laptop, flagged unknowns, and gave conditions for raising urgency. |
-| Missing information and clarifying questions | 0 | Asked nothing. | 2 | Asked for the error code, KB number, free disk space, and recent changes. |
-| Evidence-based diagnosis | 1 | Used "repeated failures" with no specific evidence. | 2 | Five hypotheses with evidence for and against, including the disk space cause the baseline missed. |
-| Safe next actions and escalation | 1 | Troubleshooter is low-risk, but no escalation and no approval. | 2 | Read-only checks, six escalation triggers, and "no changes without review and approval." |
-| Source discipline and confidence | 0 | No source and no stated confidence. | 1 | Overall confidence Low with a reason, but sources are general documentation categories. |
-| Customer and internal communication | 1 | No user message or ticket note. | 2 | Customer update asks for the KB number and error code, plus a usable internal note. |
-| **Total (out of 12)** | **4** | | **11** | |
-
-**Observed improvement:** The workflow covered disk space, which the baseline missed, and asked for the error code before recommending a fix.
-**Remaining limitation:** It said "No fix recommended due to insufficient evidence," which is cautious but less immediately useful than the troubleshooter suggestion.
-
----
-
-# Overall Totals
-
-| Version | Ticket 1 | Ticket 2 | Ticket 3 | Overall (out of 36) |
-|---|:--:|:--:|:--:|:--:|
-| Baseline (one-line prompt) | 4 | 3 | 4 | **11** |
-| Improved (3-stage workflow) | 8 | 11 | 11 | **30** |
-| Change | +4 | +8 | +7 | **+19** |
-
-The totals are a summary. The written reasons in each ticket table carry the actual evidence.
-
-# Preserved Failures and Limits
-
-- Source discipline scored 1 on every improved ticket: no specific, verified document was cited.
-- Ticket 1 improved the least: it missed the IP reset and Winsock path and lacked an approval step.
-- Each ticket was run once. Consistency across repeated runs was not tested.
-- One reviewer scored both versions, and the same person ran both, so bias is possible.
-- Three fictional tickets are a small sample. These results do not show that the workflow improves real support work.
-
-
-
-
-# Improved Results
-
-
-"Ticket 1"
-
+```text
 ## Stage 1: Triage
 
 ### 1. Problem statement
@@ -1109,13 +509,280 @@ Escalate if any of the following occur:
 **Not applicable.**
 
 Resolution is not yet verified. Per workflow requirements, no knowledge article should be created until a confirmed root cause and validated resolution exist.
+```
 
+</details>
 
+### Scoring: Run 2
 
-"Ticket 2"
+| Dimension | Baseline | Baseline reason | Run 2 | Run 2 reason |
+|---|:--:|---|:--:|---|
+| Problem summary and scope | 1 | Treated it as a single-user local issue but never confirmed scope. | 2 | Restated the problem, named 1 reported user, listed possibly affected systems, and marked the affected systems as unknown. |
+| Missing information and clarifying questions | 0 | Asked nothing. | 2 | Listed 9 missing items and 8 clarifying questions, including whether the device resumed from sleep or was re-docked after lunch. |
+| Evidence-based diagnosis | 1 | Used "single user" and "after lunch" only. | 2 | Six ranked hypotheses with evidence for and against, tied to "after lunch" (sleep/resume) and the single-user scope, plus a new DHCP/DNS hypothesis. It still does not name a corrupted network stack (Winsock). |
+| Safe next actions and escalation | 1 | Low-risk step, but no handoff condition and no approval. | 2 | Eight non-destructive checks, five escalation triggers, and human review required before any actions, not only before sending the update. |
+| Source discipline and confidence | 0 | No source and no stated confidence. | 1 | Stated confidence as Low (25%) with a reason, but sources are general categories, not specific documents. |
+| Customer and internal communication | 1 | One short fix and reason, no user message or ticket note. | 1 | Customer update and internal notes were present, but the update still never asks the user for the missing details. |
+| **Total (out of 12)** | **4** | | **10** | |
 
-Ticket 2 Output: ( New Chat in Copilot)
+**Observed improvement:** Run 2 added a DHCP/DNS hypothesis, tied the timing to sleep/resume, and required human review before any action, which closes the approval gap seen in Run 1.
+**Remaining limitation:** It still has no Winsock or network stack hypothesis, no specific sources, and a customer update that asks the user for nothing.
+**Change from Run 1:** 8 to 10 (+2). Evidence-based diagnosis and safe next actions each rose from 1 to 2.
 
+## Ticket 2: Shared Finance Printer Outage
+
+### Copilot response
+Likely fix: Restart the shared printer and clear any stuck print jobs in the print queue.
+Reason: Multiple users can't print to the same device, suggesting an issue with the shared printer or print service. Because payroll is approaching, restoring the shared printer should be prioritized.
+
+### Baseline review
+- **Impact and scope: Partial.** Noticed multiple users and payroll urgency. Gave only a few possible causes.
+- **Missing information and clarifying questions: Absent.** Asked nothing. Stronger answer: is the printer powered on and online? Has the print spooler been restarted?
+- **Evidence for the recommendation: Partial.** Used "multiple users" and "same device." Reviewer reference: Microsoft printer connectivity guidance.
+- **Source support: Absent.** Cited nothing. Reviewer reference: Microsoft Support, "Fix printer connection and printing problems in Windows."
+- **Confidence: Absent.** Copilot did not state confidence. The reference is reputable, but that is the reviewer's judgment.
+- **Safe next actions: Partial.** Restart is low-risk. Clearing the queue deletes jobs with no warning. Stronger answer: check the printer connection first.
+- **Escalation trigger: Absent.** Not stated. Stronger answer: escalate right away to a senior tech or print/server team if restart fails, the queue won't clear, or payroll is at risk. Notify the finance manager.
+- **Human approval: Absent.** Not stated. Stronger answer: Get Finance lead or on-duty technician approval before clearing the queue, since payroll documents may need reprinting.
+
+### Improved Results: Run 1
+
+<details>
+<summary>Copilot's three-stage output for Ticket 2, Run 1 (unchanged)</summary>
+
+```text
+Stage 1: Triage
+
+Problem statement
+ Several finance users are unable to use a shared printer shortly before a payroll deadline. The specific failure mode (cannot print, printer offline, jobs stuck, access denied, etc.) is not yet known.
+
+Affected users and systems
+
+Affected users: Multiple finance department users (exact number unknown)
+Affected systems: Shared printer and related print infrastructure (print server, network connectivity, printer hardware, or client devices)
+Scope: Appears to affect a group rather than a single individual
+
+Business impact
+
+Potential disruption to payroll-related activities
+Risk of delayed payroll processing or associated documentation
+Impact is concentrated on a business-critical function with a deadline
+
+Urgency
+ High
+ Reason: Multiple users affected and the issue is occurring before a payroll deadline.
+
+Category
+
+End User Services
+Printing and Print Services
+Shared Resource Outage
+
+Missing information
+
+Printer name/model
+Exact error messages
+Whether any users can print successfully
+Whether print jobs enter the queue
+Whether printer is networked or connected through a print server
+When the issue started
+Recent changes to printer, network, drivers, or print server
+Whether other departments are affected
+
+Clarifying questions
+
+What error message or behavior do users see?
+Are all finance users affected, or only some?
+Can any non-finance users print to the same printer?
+Is the printer visible and online?
+Are print jobs stuck in the queue?
+Did the issue begin after any recent change or maintenance?
+Are users able to print to other printers?
+
+Recommended route
+
+Route to Workplace/Endpoint Support or Infrastructure Print Services team.
+Escalate priority due to payroll-related business impact.
+Human review required before any actions are taken.
+Stage 2: Diagnose
+Probable causes ranked as hypotheses
+Hypothesis 1: Shared printer or print server outage
+
+Evidence for
+
+Multiple users affected simultaneously.
+Shared resource failures commonly affect groups of users.
+
+Evidence against
+
+No confirmation that all users or all departments are affected.
+
+Safest next checks
+
+Verify printer online status.
+Verify print server availability.
+Check printer queue for stalled jobs.
+
+Confidence
+
+Medium
+Hypothesis 2: Network connectivity issue between users and printer
+
+Evidence for
+
+Multiple users may lose access to a network printer simultaneously.
+Shared printers depend on network reachability.
+
+Evidence against
+
+No reports yet of broader network issues.
+
+Safest next checks
+
+Verify printer network connectivity.
+Confirm affected users can reach other network resources.
+Check for network alerts affecting the printer's location.
+
+Confidence
+
+Medium
+Hypothesis 3: Print queue blockage or spooler service issue
+
+Evidence for
+
+A single corrupted or stuck job can prevent subsequent jobs from printing.
+Common cause of sudden printing outages.
+
+Evidence against
+
+No evidence yet that jobs are actually reaching the queue.
+
+Safest next checks
+
+Review queue status.
+Check print spooler service health.
+Identify unusually large or failed print jobs.
+
+Confidence
+
+Medium-Low
+Hypothesis 4: Permission or access-control issue
+
+Evidence for
+
+Could affect a department-specific group.
+
+Evidence against
+
+Simultaneous permission failures affecting several users are less common without a recent change.
+
+Safest next checks
+
+Review recent permission changes.
+Compare successful and unsuccessful user access.
+
+Confidence
+
+Low
+Hypothesis 5: Printer hardware fault (paper, toner, jam, offline state)
+
+Evidence for
+
+Hardware faults frequently stop printing for all users.
+
+Evidence against
+
+No printer status information has been provided.
+
+Safest next checks
+
+Check printer display/status panel.
+Verify paper, toner, and error indicators.
+Confirm printer is powered on and operational.
+
+Confidence
+
+Low-Medium
+Assumptions
+This is a network-shared printer used by multiple finance users.
+The reported outage is current and unresolved.
+No verified root cause has been established.
+No troubleshooting results have yet been provided.
+Vendor sources to verify
+
+Useful vendor documentation may include:
+
+Microsoft Windows Print Management documentation
+Microsoft Print Spooler troubleshooting guidance
+Printer manufacturer support documentation for the affected model
+Escalation trigger
+
+Escalate immediately to Tier 2 or Print Services if:
+
+Payroll operations are blocked.
+Printer is confirmed offline and requires infrastructure intervention.
+Multiple departments are impacted.
+Print server services are degraded.
+No service restoration path is identified within agreed service targets.
+Stage 3: Communicate and Document
+Customer-facing update
+
+We are investigating reports that multiple finance users are unable to use a shared printer. Given the proximity to the payroll deadline, this incident is being treated as a high-priority issue. Initial assessment is underway to determine whether the cause is related to the printer itself, the print service, network connectivity, or access controls. Further updates will be provided after verification of the affected systems.
+
+Status: Under investigation
+ Impact: Multiple finance users affected
+ Next step: Technical validation and service-health checks
+
+Human review required before sending.
+
+Internal work notes
+Incident reported: shared printer unavailable to several finance users.
+Business impact elevated due to payroll deadline.
+Root cause not yet identified.
+Working hypotheses:
+Print server or shared printer outage
+Network connectivity issue
+Queue/spooler blockage
+Access-control issue
+Hardware fault
+Required checks:
+Printer status
+Print queue status
+Print server health
+Network connectivity
+Scope of affected users
+No corrective action recommended yet due to insufficient evidence.
+Human review required before any operational changes.
+Knowledge-article candidate
+
+Not created.
+
+Reason: Resolution has not been verified. Per process requirements, a knowledge article should only be proposed after the root cause and successful resolution are confirmed.
+```
+
+</details>
+
+### Scoring: Baseline vs. Run 1
+
+| Dimension | Baseline | Baseline reason | Improved | Improved reason |
+|---|:--:|---|:--:|---|
+| Problem summary and scope | 1 | Noticed multiple users and payroll, but gave no scope detail. | 2 | Identified a group impact, affected systems, business impact, and High urgency tied to the payroll deadline. |
+| Missing information and clarifying questions | 0 | Asked nothing. | 2 | Listed 8 missing items and 7 questions (error messages, queue status, recent changes). |
+| Evidence-based diagnosis | 1 | Used "multiple users" and "same device." | 2 | Five hypotheses, each with evidence for and against, tied to the ticket facts. |
+| Safe next actions and escalation | 0 | Cleared the queue with no warning and gave no escalation, despite payroll risk. | 2 | Safe read-only checks, immediate escalation conditions, and human review before any action. |
+| Source discipline and confidence | 0 | No source and no stated confidence. | 1 | Confidence given per hypothesis, but sources are general vendor categories, not specific articles. |
+| Customer and internal communication | 1 | No user message or ticket note. | 2 | Status update with impact and next step, plus detailed internal notes. |
+| **Total (out of 12)** | **3** | | **11** | |
+
+**Observed improvement:** The baseline's risky "clear the queue" advice was replaced by safe checks, a payroll-aware escalation plan, and a human review requirement.
+**Remaining limitation:** It recommended no fix at all, so a technician still has to turn the checks into action.
+
+### Improved Results: Run 2 (new chat)
+
+<details>
+<summary>Copilot's three-stage output for Ticket 2, Run 2 (unchanged)</summary>
+
+```text
 ## Stage 1: Triage
 
 ### 1. Problem statement
@@ -1327,11 +994,291 @@ Escalate if any of the following are confirmed:
 **Not applicable.**
 
 A knowledge article should only be created after the root cause and resolution have been verified and documented. No verified resolution exists at this time.
+```
 
+</details>
 
-"Ticket 3"
+### Scoring: Run 2
 
+| Dimension | Baseline | Baseline reason | Run 2 | Run 2 reason |
+|---|:--:|---|:--:|---|
+| Problem summary and scope | 1 | Noticed multiple users and payroll, but gave no scope detail. | 2 | Identified multiple finance users, a shared printer, payroll business impact, and High urgency tied to the deadline. |
+| Missing information and clarifying questions | 0 | Asked nothing. | 2 | Listed 8 missing items and 7 clarifying questions (error messages, queue status, alternate printers, recent changes). |
+| Evidence-based diagnosis | 1 | Used "multiple users" and "same device." | 2 | Five hypotheses, each with evidence for and against, tied to the shared-printer and multiple-user facts. |
+| Safe next actions and escalation | 0 | Cleared the queue with no warning and gave no escalation, despite payroll risk. | 2 | Seven non-destructive checks, six escalation triggers including the payroll deadline, and human review required before any remediation. |
+| Source discipline and confidence | 0 | No source and no stated confidence. | 1 | Overall confidence Low to Medium with a reason, but sources are general vendor categories, not specific articles. |
+| Customer and internal communication | 1 | No user message or ticket note. | 2 | Customer update gives status, impact, and priority, and the internal notes list exactly what to collect. |
+| **Total (out of 12)** | **3** | | **11** | |
 
+**Observed improvement:** The baseline's risky "clear the queue" advice is again replaced by safe checks, payroll-aware escalation, and required human review.
+**Remaining limitation:** It recommends no fix, so a technician must still turn the checks into action. It dropped Run 1's per-hypothesis confidence and its Status / Impact / Next step block, which this rubric does not score.
+**Change from Run 1:** 11 to 11 (no change). Every dimension scored the same as in Run 1, although the wording and structure differ.
+
+## Ticket 3: Recurring Windows 11 Update Failure
+
+### Copilot response
+Likely fix: Run the Windows Update Troubleshooter and retry the update.
+Reason: Repeated update failures on a single laptop are commonly caused by corrupted update components or configuration issues that the troubleshooter can often repair.
+
+### Baseline review
+- **Impact and scope: Partial.** Noted a single laptop. Did not consider low disk space or internet connectivity.
+- **Missing information and clarifying questions: Absent.** Asked nothing. Stronger answer: ask for the error code and check whether free disk space meets update requirements.
+- **Evidence for the recommendation: Partial.** Used "repeated failures" but no specific error. Reviewer reference: Microsoft update troubleshooting documentation.
+- **Source support: Absent.** Cited nothing. Reviewer reference: Microsoft Support, "Troubleshoot problems updating Windows."
+- **Confidence: Absent.** Copilot did not state confidence. Words like "commonly" and "often" are vague.
+- **Safe next actions: Partial.** The troubleshooter is low-risk. Stronger answer: check disk space and connectivity first.
+- **Escalation trigger: Absent.** Not stated. Stronger answer: escalate to a senior tech or endpoint team if the troubleshooter fails, the same error code recurs, or system files appear corrupted or the laptop won't boot normally.
+- **Human approval: Absent.** Not stated. Stronger answer: a technician approves deeper repairs and confirms files are backed up first.
+
+### Improved Results: Run 1
+
+<details>
+<summary>Copilot's three-stage output for Ticket 3, Run 1 (unchanged)</summary>
+
+```text
+Stage 1: Triage
+
+Problem statement
+ A Windows 11 laptop repeatedly fails to install a Windows Update. No error code, update identifier, or failure details were provided. (Synthetic training scenario.)
+
+Affected users and systems
+
+Known affected users: 1 user
+Known affected systems: 1 Windows 11 laptop
+Scope: Currently appears isolated to a single endpoint
+Unknown: Whether similar failures exist on other devices
+
+Business impact
+
+Device may miss security, reliability, or feature updates.
+Potential compliance and security risk if updates remain uninstalled.
+Unknown whether the failure is impacting user productivity.
+
+Urgency
+
+Medium (provisional)
+Increase to High if:
+Security updates are affected
+Multiple devices are impacted
+Device stability or business operations are affected
+
+Category
+
+Endpoint Management
+Windows Update
+Operating System Maintenance
+
+Missing information
+
+Windows Update error code
+Specific update KB number or update name
+Date and time of failures
+Whether all updates fail or only one update
+Available disk space
+Device management status (personal, managed, Intune-managed, etc.)
+Screenshots or update history details
+Windows build/version
+
+Clarifying questions
+
+What error message or error code is displayed?
+Which update is failing (KB number or title)?
+Is the failure occurring during download, installation, or restart?
+Are other updates installing successfully?
+How much free disk space is available?
+Has the device recently undergone major changes (drivers, upgrades, security software)?
+Is the device managed by an organization?
+
+Recommended route
+
+Tier 1 Windows Endpoint Support
+Collect diagnostic information before escalation
+Escalate to Tier 2 only if logs, error codes, or standard diagnostics indicate a deeper servicing or OS issue
+Stage 2: Diagnose
+Probable causes ranked as hypotheses
+Hypothesis 1: Corrupted Windows Update components or update cache
+
+Evidence for
+
+Repeated update failures are commonly associated with update cache or servicing component issues.
+No indication that the failure is tied to a specific application.
+
+Evidence against
+
+No error codes or logs provided.
+No confirmation that downloads or installations are actually failing.
+
+Safest next checks
+
+Review Windows Update history.
+Capture the exact error code.
+Check Event Viewer and Windows Update logs.
+Verify update service status.
+
+Confidence
+
+Moderate
+Hypothesis 2: Insufficient disk space or storage-related issue
+
+Evidence for
+
+Updates can fail when required free space is unavailable.
+Storage issues are a frequent cause of upgrade/install failures.
+
+Evidence against
+
+No storage information supplied.
+No indication of low-disk-space warnings.
+
+Safest next checks
+
+Verify available disk space.
+Check for storage-related warnings.
+
+Confidence
+
+Low to Moderate
+Hypothesis 3: Specific update package is defective or incompatible with the device state
+
+Evidence for
+
+Some failures affect only a particular update package.
+Repeated failure of a single KB can indicate a package-specific issue.
+
+Evidence against
+
+The update identifier is unknown.
+No pattern information is available.
+
+Safest next checks
+
+Identify the failing KB/article number.
+Review update history for success/failure patterns.
+
+Confidence
+
+Low to Moderate
+Hypothesis 4: Corrupted system files or servicing stack issues
+
+Evidence for
+
+Corrupted OS components can prevent successful update installation.
+Repeated failures may indicate servicing infrastructure problems.
+
+Evidence against
+
+No system integrity indicators supplied.
+No evidence from logs.
+
+Safest next checks
+
+Review servicing logs.
+Check for system file integrity errors through approved diagnostic procedures.
+
+Confidence
+
+Low to Moderate
+Hypothesis 5: Third-party security, driver, or software conflict
+
+Evidence for
+
+Security software and drivers can interfere with update installation.
+Endpoint-specific failures sometimes correlate with local software conflicts.
+
+Evidence against
+
+No recent changes have been reported.
+No supporting symptoms provided.
+
+Safest next checks
+
+Review recently installed software and drivers.
+Check security application logs for update-related events.
+
+Confidence
+
+Low
+Assumptions
+Only one Windows 11 endpoint is affected.
+The device can still boot and operate normally.
+No evidence currently suggests widespread service disruption.
+No update error code has been collected.
+Confidence
+
+Overall confidence: Low
+
+Reason: Critical diagnostic evidence (error code, update identifier, logs, screenshots, and timing information) is missing.
+
+Vendor sources to verify
+Microsoft Windows Update troubleshooting documentation
+Microsoft Windows Update deployment and servicing documentation
+Microsoft Update Catalog (for the specific KB if identified)
+Microsoft Learn articles related to the reported error code once obtained
+Escalation trigger
+
+Escalate to Tier 2 if any of the following occur:
+
+Error code cannot be resolved through documented troubleshooting.
+Servicing stack corruption is indicated by logs.
+Multiple devices exhibit the same failure.
+Security updates remain uninstalled after standard diagnostics.
+Update-related logs show OS corruption or enterprise-management issues.
+The device is business-critical and update failure creates operational risk.
+Stage 3: Communicate and Document
+Customer-facing update
+
+We are investigating a recurring Windows Update failure on your Windows 11 laptop. At this time, we do not have enough information to determine the cause. The next step is to collect the exact update name or KB number, any error code displayed, and update history details. Once that information is available, we can safely identify the most likely cause and determine the appropriate remediation path. No changes will be made without review and approval.
+
+Human review required before sending.
+
+Internal work notes
+Ticket received for recurring Windows Update failure.
+Single Windows 11 laptop reportedly affected.
+No error code, KB identifier, logs, screenshots, or update history supplied.
+Initial hypotheses:
+Corrupted Windows Update components/cache
+Storage limitation
+Update-specific package issue
+System servicing corruption
+Third-party software conflict
+Action required:
+Obtain error code
+Obtain update KB/title
+Review update history
+Check available disk space
+Collect relevant event and servicing log information
+Current diagnostic confidence: Low
+No fix recommended due to insufficient evidence.
+Knowledge-article candidate
+
+Not applicable.
+
+Resolution has not been verified. Per process, no knowledge article should be created until root cause and successful resolution are confirmed through evidence and validation.
+```
+
+</details>
+
+### Scoring: Baseline vs. Run 1
+
+| Dimension | Baseline | Baseline reason | Improved | Improved reason |
+|---|:--:|---|:--:|---|
+| Problem summary and scope | 1 | Noted a single laptop, but not disk space or connectivity. | 2 | Identified 1 user and 1 laptop, flagged unknowns, and gave conditions for raising urgency. |
+| Missing information and clarifying questions | 0 | Asked nothing. | 2 | Asked for the error code, KB number, free disk space, and recent changes. |
+| Evidence-based diagnosis | 1 | Used "repeated failures" with no specific evidence. | 2 | Five hypotheses with evidence for and against, including the disk space cause the baseline missed. |
+| Safe next actions and escalation | 1 | Troubleshooter is low-risk, but no escalation and no approval. | 2 | Read-only checks, six escalation triggers, and "no changes without review and approval." |
+| Source discipline and confidence | 0 | No source and no stated confidence. | 1 | Overall confidence Low with a reason, but sources are general documentation categories. |
+| Customer and internal communication | 1 | No user message or ticket note. | 2 | Customer update asks for the KB number and error code, plus a usable internal note. |
+| **Total (out of 12)** | **4** | | **11** | |
+
+**Observed improvement:** The workflow covered disk space, which the baseline missed, and asked for the error code before recommending a fix.
+**Remaining limitation:** It said "No fix recommended due to insufficient evidence," which is cautious but less immediately useful than the troubleshooter suggestion.
+
+### Improved Results: Run 2 (new chat)
+
+<details>
+<summary>Copilot's three-stage output for Ticket 3, Run 2 (unchanged)</summary>
+
+```text
 # Stage 1: Triage
 
 **Problem statement**
@@ -1517,4 +1464,134 @@ Escalate to Tier 2 if any of the following occur:
 **Not created.**
 
 Reason: Resolution has not been verified. Per process requirements, a knowledge article should only be created after the root cause and successful resolution are confirmed.
+```
 
+</details>
+
+### Scoring: Run 2
+
+| Dimension | Baseline | Baseline reason | Run 2 | Run 2 reason |
+|---|:--:|---|:--:|---|
+| Problem summary and scope | 1 | Noted a single laptop, but not disk space or connectivity. | 2 | Identified 1 user and 1 laptop, flagged unknowns, and gave conditions for raising urgency. |
+| Missing information and clarifying questions | 0 | Asked nothing. | 2 | Listed 9 missing items and 8 clarifying questions, including the failure stage and free disk space. |
+| Evidence-based diagnosis | 1 | Used "repeated failures" with no specific evidence. | 1 | Five hypotheses, but the top-ranked one is "insufficient information" rather than a cause, most "evidence against" entries say none or no evidence, and disk space is folded into a broad "environmental" hypothesis. |
+| Safe next actions and escalation | 1 | Troubleshooter is low-risk, but no escalation and no approval. | 2 | Eight read-only checks, six escalation triggers, "no remediation executed," and human review required before any action. |
+| Source discipline and confidence | 0 | No source and no stated confidence. | 2 | Cited four specific Microsoft pages (each opened and matched how it was used) and stated Low (25%) confidence with a reason. |
+| Customer and internal communication | 1 | No user message or ticket note. | 2 | Customer update asks for the KB number, error code, and failure stage, plus a usable internal note. |
+| **Total (out of 12)** | **4** | | **11** | |
+
+**Observed improvement:** Run 2 cited specific, verifiable Microsoft pages, which fixes the weakness every Run 1 ticket had on sources.
+**Remaining limitation:** The diagnosis is thinner than Run 1: the top hypothesis is not a cause, and the release-health page it cites is specific to version 25H2 even though the laptop's Windows build is unknown.
+**Change from Run 1:** 11 to 11 (no change in total). Source discipline rose from 1 to 2, and evidence-based diagnosis fell from 2 to 1.
+
+---
+
+# Scoring Rubric
+
+Each response is scored on the same six dimensions, 0 to 2 each, for a maximum of 12 per ticket. The same rubric is applied to the baseline and to the 3-stage workflow.
+
+## Dimensions
+1. **Problem summary and scope:** Does it restate the problem and say who and what is affected?
+2. **Missing information and clarifying questions:** Does it name what it doesn't know and ask for it?
+3. **Evidence-based diagnosis:** Is the diagnosis tied to clues in the ticket?
+4. **Safe next actions and escalation:** Are the first steps low-risk, and does it say when to hand off and who must approve?
+5. **Source discipline and confidence:** Does it cite real sources and state how sure it is?
+6. **Customer and internal communication:** Is there a clear user-facing message and a usable ticket note?
+
+## Score values
+| Score | Meaning |
+|-------|---------|
+| 0 | The behavior is absent or unsafe. |
+| 1 | The behavior is partial. |
+| 2 | The behavior is complete and usable with human review. |
+
+## Baseline scores (one-line prompt)
+
+| Dimension | Ticket 1 | Ticket 2 | Ticket 3 |
+|-----------|:--:|:--:|:--:|
+| Problem summary and scope | 1 | 1 | 1 |
+| Missing information and clarifying questions | 0 | 0 | 0 |
+| Evidence-based diagnosis | 1 | 1 | 1 |
+| Safe next actions and escalation | 1 | 0 | 1 |
+| Source discipline and confidence | 0 | 0 | 0 |
+| Customer and internal communication | 1 | 1 | 1 |
+| **Total (out of 12)** | **4** | **3** | **4** |
+
+### Baseline scoring notes
+- Ticket 2 scored 0 on safe actions and escalation because clearing the queue deletes jobs with no warning, and nothing was said about payroll escalation. The Ticket 2 baseline review labels this item "Partial" because it uses the earlier eight-check list, which separates safe actions from escalation. The rubric scores unsafe advice as 0.
+- Communication scored 1: the answers are clear but brief, with no user-facing reply or ticket note.
+- Baseline scores reflect my review of the one-line prompt only.
+
+## Improved scores (3-stage workflow, Run 1)
+
+| Dimension | Ticket 1 | Ticket 2 | Ticket 3 |
+|-----------|:--:|:--:|:--:|
+| Problem summary and scope | 2 | 2 | 2 |
+| Missing information and clarifying questions | 2 | 2 | 2 |
+| Evidence-based diagnosis | 1 | 2 | 2 |
+| Safe next actions and escalation | 1 | 2 | 2 |
+| Source discipline and confidence | 1 | 1 | 1 |
+| Customer and internal communication | 1 | 2 | 2 |
+| **Total (out of 12)** | **8** | **11** | **11** |
+
+### Run 1 scoring notes
+- Source discipline scored 1 on every ticket: Copilot named general documentation categories, not specific documents a reader could open.
+- Ticket 1 scored lowest because it missed the IP and Winsock hypothesis, gave no approval step for technical actions, and its customer update never asked the user for the missing details.
+- Tickets 2 and 3 lost points only on source discipline.
+- Scores are the reviewer's judgment, with the written reason for each score in each ticket's scoring section above.
+
+## Improved scores (3-stage workflow, Run 2)
+
+| Dimension | Ticket 1 | Ticket 2 | Ticket 3 |
+|-----------|:--:|:--:|:--:|
+| Problem summary and scope | 2 | 2 | 2 |
+| Missing information and clarifying questions | 2 | 2 | 2 |
+| Evidence-based diagnosis | 2 | 2 | 1 |
+| Safe next actions and escalation | 2 | 2 | 2 |
+| Source discipline and confidence | 1 | 1 | 2 |
+| Customer and internal communication | 1 | 2 | 2 |
+| **Total (out of 12)** | **10** | **11** | **11** |
+
+### Run 2 scoring notes
+- Run 2 was scored with the same six dimensions and the same 0 to 2 definitions as Run 1. The baseline scores were left unchanged.
+- Ticket 1 gained two points (diagnosis and safe actions). The diagnosis score is the most debatable: Run 2 added a DHCP/DNS hypothesis but still does not name a corrupted network stack (Winsock). A stricter reading would score it 1 and make the Ticket 1 total 9.
+- Ticket 2 scored the same on every dimension as Run 1, even though its wording and structure changed.
+- Ticket 3 kept the same total but swapped strengths: source discipline rose to 2 and evidence-based diagnosis fell to 1.
+- Source discipline reached 2 only on Ticket 3 Run 2, the only run that cited specific pages.
+
+## How to read the score tables
+
+| Column | Meaning |
+|---|---|
+| **Dimension** | The thing being graded. All six rubric dimensions are used for every ticket. |
+| **Baseline** | The 0 to 2 score for the one-line prompt. |
+| **Baseline reason** | Why the baseline received that score. |
+| **Improved** | The 0 to 2 score for the three-stage workflow. |
+| **Improved reason** | Why the improved version received that score, including why it stopped short of 2. |
+| **Run 2** and **Run 2 reason** | In the Run 2 scoring tables, these take the place of the Improved columns and describe the second three-stage run. In the Run 1 tables, the Improved columns describe the first run. |
+
+---
+
+# Overall Totals
+
+| Version | Ticket 1 | Ticket 2 | Ticket 3 | Overall (out of 36) |
+|---|:--:|:--:|:--:|:--:|
+| Baseline (one-line prompt) | 4 | 3 | 4 | **11** |
+| Improved, Run 1 (3-stage workflow) | 8 | 11 | 11 | **30** |
+| Improved, Run 2 (3-stage workflow) | 10 | 11 | 11 | **32** |
+| Average of Run 1 and Run 2 | 9 | 11 | 11 | **31** |
+| Change, Run 1 vs. baseline | +4 | +8 | +7 | **+19** |
+| Change, Run 2 vs. baseline | +6 | +8 | +7 | **+21** |
+| Change, Run 2 vs. Run 1 | +2 | 0 | 0 | **+2** |
+
+The totals are a summary. The written reasons in each ticket's scoring tables carry the actual evidence.
+
+# Preserved Failures and Limits
+
+- Source discipline scored 1 on every Run 1 ticket and on Run 2 Tickets 1 and 2, because no specific, verified document was cited. Only Ticket 3 Run 2 reached 2.
+- Ticket 1 improved the least in Run 1: it lacked an approval step and an IP or Winsock hypothesis. Run 2 added a human review requirement and a DHCP/DNS hypothesis, but still does not name a corrupted network stack.
+- Each ticket was run twice, in separate chats, and the outputs differed in wording, hypothesis order, structure, and sources. The structure of the workflow stayed stable while the content did not, and two runs are still too few to measure consistency.
+- Run conditions were not recorded (date, Copilot mode, whether web search was on). Ticket 3 Run 2 cited specific pages while Ticket 1 and 2 Run 2 did not, so the source improvement cannot be credited to the workflow alone.
+- Matching totals can hide differences. Ticket 3 scored 11 on both runs, but for different reasons.
+- One reviewer scored the baseline and both runs, and the same person ran them, so bias is possible.
+- Three fictional tickets are a small sample. These results do not show that the workflow improves real support work.
