@@ -16,4 +16,21 @@ AI prompts that request one fix will most likely get exactly that: one likely fi
 
 ##### Supporting Evidence
 
-[Test Tickets](TEST-TICKETS.md)
+The links below are the evidence for the case study, so you can check each claim in the summary above. 
+
+[Test Tickets](TEST-TICKETS.md): The three fictional unchanged tickets used for both the baseline and improved runs.
+[PROMPT-WORKFLOW](PROMPT-WORKFLOW.md): The three-stage workflow prompts used for the improved run.
+[BENCHMARK.md](BENCHMARK.md): The before-and-after comparison scores and other related metrics and assessments.
+
+
+###### Score table and statement
+
+| Version           | Ticket 1 | Ticket 2 | Ticket 3 | Overall (of 36) |
+|-------------------|:--------:|:--------:|:--------:|:---------------:|
+| Baseline          | 4        | 3        | 4        | 11              |
+| Improved: Run 1   | 8        | 11       | 11       | 30              |
+| Improved: Run 2   | 10       | 11       | 11       | 32              |
+
+These results come from a small controlled test of three synthetic tickets, each scored out of 12 on the same rubric.
+
+
