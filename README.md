@@ -2,11 +2,11 @@
 
 ## Support Problem
 
-Tier 1 support tickets often arrive incomplete because of how they are reported. This includes missing details such as error messages and how many people are affected, which can result in two technicians handling the same ticket differently. This can lead to risky fixes and slower resolution timelines. Consistent triage provides a clear structure with specific instructions and the same first question, no matter which technician handles it.
+Several support tickets for Tier 1 issues are incomplete. This can lead different technicians to use different solutions for the same issue. Some of these solutions can be risky and can lead to long resolution times. Having a consistent triage step with instructions on how to handle the different issues and the first question that is asked in each case is key.
 
 ### Why a Naive Prompt is Risky
 
-AI prompts that request one fix will most likely get exactly that: one likely fix with a short, vague reason. This is because nothing in the prompt compels the Copilot AI agent to ask clarifying questions, cite reasoning sources, state how confident it is in its answer, or indicate when to escalate or require human approval. Each one of those aforementioned attributes was missing during the baseline test. For example, on a ticket about an Individual Connectivity Loss for the user's network, Copilot never stated how sure it was that its answer was correct (i.e., confidence was marked as absent). As a result, I assessed the baseline score as four, three, and four out of the grand total of thirty-six across the three combined tickets.
+When you use a simple prompt to ask the Copilot AI agent to solve a support problem, it will most likely provide one likely solution with a short, vague explanation of why it thinks that solution is correct. This is because there is nothing in the prompt that would lead the Copilot AI agent to ask for more information (to understand the problem better), to provide more reasoning for its answer (to explain why it thinks its answer is correct), to state how confident it is in its answer (to indicate how likely it is that its answer is correct), or to indicate whether or not the problem needs to be escalated to a human support technician (to indicate whether or not the Copilot AI agent believes that the problem is beyond its capabilities). All of these features were missing in the baseline test. For example, in the baseline test, the Copilot AI agent was asked to solve a support problem for an Individual Connectivity Loss for the user's network. The Copilot AI agent provided a solution, but it never stated how confident it was that the answer was correct (i.e., confidence was marked as absent). Based on this, I scored the baseline test four, three, and four for the three combined support problems, for a total of thirty-six points out of a possible thirty-six points.
 
 #### Three-Stage Workflow
 
@@ -16,7 +16,7 @@ AI prompts that request one fix will most likely get exactly that: one likely fi
 
 ##### Supporting Evidence
 
-The links below are the evidence for the case study, so you can check each claim in the summary above. 
+The links below are the evidence for the case study, so you can check each claim in the summary above.
 
 [Test Tickets](TEST-TICKETS.md): The three fictional unchanged tickets used for both the baseline and improved runs.
 [PROMPT-WORKFLOW](PROMPT-WORKFLOW.md): The three-stage workflow prompts used for the improved run.
@@ -25,12 +25,46 @@ The links below are the evidence for the case study, so you can check each claim
 
 ###### Score table and statement
 
-| Version           | Ticket 1 | Ticket 2 | Ticket 3 | Overall (of 36) |
-|-------------------|:--------:|:--------:|:--------:|:---------------:|
-| Baseline          | 4        | 3        | 4        | 11              |
-| Improved: Run 1   | 8        | 11       | 11       | 30              |
-| Improved: Run 2   | 10       | 11       | 11       | 32              |
+| Version | Ticket 1 | Ticket 2 | Ticket 3 | Overall (of 36) |
+|---|---|---|---|---|
+| Baseline | 4 | 3 | 4 | 11 |
+| Improved: Run 1 | 8 | 11 | 11 | 30 |
+| Improved: Run 2 | 10 | 11 | 11 | 32 |
 
 These results come from a small controlled test of three synthetic tickets, each scored out of 12 on the same rubric.
+
+####### **Example 1 (missing information or evidence-based checks)**
+
+Baseline: The user can disable and re-enable the network adapter on their device, or reconnect to the Wi-Fi network. No clarifying questions are asked of the user.
+
+Workflow: Copilot asks the user clarifying questions, including what type of internet the user is using, what happens to the affected device(s) when the internet is lost, and whether any error messages are displayed on the screen.
+
+
+######## **Example 2 (escalation or communication)**
+
+Baseline: Copilot said that since multiple users cannot print to the same device, restart the shared printer and clear stuck print jobs from the queue.
+
+Workflow: The tickets from the two improved runs were treated as high urgency because they impacted payroll and could block it or put it at risk. Therefore, the necessary escalation triggers were listed, and a customer status update, internal work notes, and a knowledge-article candidate were drafted and required human review before any action could be taken.
+
+######### **Limitation and the “does not prove” statement**
+
+Limitations: There was no recommendation for a fix; i.e., the technician must translate the checks Copilot provided into action.
+
+The tests run for this ticket do not prove anything regarding production performance. The ticket was fictional and was scored by one reviewer.
+
+########## **Responsible Use**
+
+## Responsible Use
+
+| Rule | Why it exists |
+| --- | --- |
+| Synthetic data only | This repository is public and thus no information about any real person or company shall be exposed. |
+| Vendor sources require verification before use. | Copilot’s citations may be wrong and thus should be verified by a person before use. |
+| Private information and credentials stay outside the workflow. | Do not enter passwords or personal information in the prompt. |
+| Human Approval of Output | Human Approval of Output |
+
+
+
+
 
 
