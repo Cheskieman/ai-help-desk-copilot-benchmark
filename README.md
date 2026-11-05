@@ -6,7 +6,7 @@ Several support tickets for Tier 1 issues are incomplete. This can lead differen
 
 ### Why a Naive Prompt is Risky
 
-When you use a simple prompt to ask the Copilot AI agent to solve a support problem, it will most likely provide one likely solution with a short, vague explanation of why it thinks that solution is correct. This is because there is nothing in the prompt that would lead the Copilot AI agent to ask for more information (to understand the problem better), to provide more reasoning for its answer (to explain why it thinks its answer is correct), to state how confident it is in its answer (to indicate how likely it is that its answer is correct), or to indicate whether or not the problem needs to be escalated to a human support technician (to indicate whether or not the Copilot AI agent believes that the problem is beyond its capabilities). All of these features were missing in the baseline test. For example, in the baseline test, the Copilot AI agent was asked to solve a support problem for an Individual Connectivity Loss for the user's network. The Copilot AI agent provided a solution, but it never stated how confident it was that the answer was correct (i.e., confidence was marked as absent). Based on this, I scored the baseline test four, three, and four for the three combined support problems, for a total of thirty-six points out of a possible thirty-six points.
+When you use a simple prompt to ask the Copilot AI agent to solve a support problem, it will most likely provide one likely solution with a short, vague explanation of why it thinks that solution is correct. This is because there is nothing in the prompt that would lead the Copilot AI agent to ask for more information (to understand the problem better), to provide more reasoning for its answer (to explain why it thinks its answer is correct), to state how confident it is in its answer (to indicate how likely it is that its answer is correct), or to indicate whether or not the problem needs to be escalated to a human support technician (to indicate whether or not the Copilot AI agent believes that the problem is beyond its capabilities). All of these features were missing in the baseline test. For example, in the baseline test, the Copilot AI agent was asked to solve a support problem for an Individual Connectivity Loss for the user's network. The Copilot AI agent provided a solution, but it never stated how confident it was that the answer was correct (i.e., confidence was marked as absent). Based on this, I scored the baseline test four, three, and four for the three combined support problems, for a total of eleven points out of a possible thirty-six points.
 
 #### Three-Stage Workflow
 
@@ -35,7 +35,7 @@ These results come from a small controlled test of three synthetic tickets, each
 
 ####### **Example 1 (missing information or evidence-based checks)**
 
-Baseline: The user can disable and re-enable the network adapter on their device, or reconnect to the Wi-Fi network. No clarifying questions are asked of the user.
+Baseline: The user can disable and re-enable the network adapter on their device, or reconnect to the Wi-Fi network. The user is not asked clarifying questions.
 
 Workflow: Copilot asks the user clarifying questions, including what type of internet the user is using, what happens to the affected device(s) when the internet is lost, and whether any error messages are displayed on the screen.
 
@@ -44,7 +44,7 @@ Workflow: Copilot asks the user clarifying questions, including what type of int
 
 Baseline: Copilot said that since multiple users cannot print to the same device, restart the shared printer and clear stuck print jobs from the queue.
 
-Workflow: The tickets from the two improved runs were treated as high urgency because they impacted payroll and could block it or put it at risk. Therefore, the necessary escalation triggers were listed, and a customer status update, internal work notes, and a knowledge-article candidate were drafted and required human review before any action could be taken.
+Workflow: The tickets from the two improved runs were treated as high urgency because they impacted payroll and could block it or put it at risk. Therefore, the necessary escalation triggers were listed, a customer status update was drafted, internal work notes were created, and a knowledge-article candidate was created and required human review before taking any action.
 
 ######### **Limitation and the “does not prove” statement**
 
@@ -54,7 +54,6 @@ The tests run for this ticket do not prove anything regarding production perform
 
 ########## **Responsible Use**
 
-## Responsible Use
 
 | Rule | Why it exists |
 | --- | --- |
